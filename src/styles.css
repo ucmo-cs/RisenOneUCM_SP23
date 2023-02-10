@@ -1,0 +1,18 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+/* Basic prelim styling for the top-bar component
+    based off the Angular.io/start tutorial */
+mat-toolbar{
+    width: 100%;
+    height: 68px;
+    background-color:rgb(196, 11, 11);
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
