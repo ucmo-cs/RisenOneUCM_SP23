@@ -20,25 +20,24 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
 
-  displayedColumns: string[] = ['teststring', ];//'status',];
+  displayedColumns: string[] = ['body','statusCode',];
 
   public dataSource: MatTableDataSource<Reports>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  private dataArray: string;
+  private dataArray: any;
 
   constructor(private financeService: DataTableService) { }
 
   ngOnInit() {
     this.subs.add(this.financeService.getRandomUsers()
       .subscribe((res) => {
-        //console.log(res);
-        this.dataArray =  JSON.stringify(res);
+        console.log(res);
+        this.dataArray =  res;
 
         this.dataSource = new MatTableDataSource<Reports>(this.dataArray);
-        //console.log(this.dataArray);
         //this.dataSource.paginator = this.paginator;
         //this.dataSource.sort = this.sort;
       },
