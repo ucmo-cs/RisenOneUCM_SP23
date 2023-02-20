@@ -6,7 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Hero } from './hero';
+import { StatusReport } from './statusReport';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 
 const httpOptions = {
@@ -17,7 +17,7 @@ const httpOptions = {
 };
 
 @Injectable()
-export class HeroesService {
+export class DataTableService {
   heroesUrl = 'https://zx62abb126.execute-api.us-east-2.amazonaws.com/prod';  // URL to web api
   private handleError: HandleError;
   
@@ -30,32 +30,32 @@ export class HeroesService {
   }
 
   /** GET heroes from the server */
-  getHeroes(): Observable<Hero[]> {
-    return this.http.get<Hero[]>(this.heroesUrl)
+  getHeroes(): Observable<StatusReport[]> {
+    return this.http.get<StatusReport[]>(this.heroesUrl)
       .pipe(
         catchError(this.handleError('getHeroes', []))
       );
   }
 
   /* GET heroes whose name contains search term */
-  searchHeroes(term: string): Observable<Hero[]> {
+  searchHeroes(term: string): Observable<StatusReport[]> {
     term = term.trim();
 
     // Add safe, URL encoded search parameter if there is a search term
     const options = term ?
      { params: new HttpParams().set('name', term) } : {};
 
-    return this.http.get<Hero[]>(this.heroesUrl, options)
+    return this.http.get<StatusReport[]>(this.heroesUrl, options)
       .pipe(
-        catchError(this.handleError<Hero[]>('searchHeroes', []))
+        catchError(this.handleError<StatusReport[]>('searchHeroes', []))
       );
   }
 
   //////// Save methods //////////
 
   /** POST: add a new hero to the database */
-  addHero(hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions)
+  addHero(hero: StatusReport): Observable<StatusReport> {
+    return this.http.post<StatusReport>(this.heroesUrl, hero, httpOptions)
       .pipe(
         catchError(this.handleError('addHero', hero))
       );
@@ -71,11 +71,11 @@ export class HeroesService {
   }
 
   /** PUT: update the hero on the server. Returns the updated hero upon success. */
-  updateHero(hero: Hero): Observable<Hero> {
+  updateHero(hero: StatusReport): Observable<StatusReport> {
     httpOptions.headers =
       httpOptions.headers.set('Authorization', 'my-new-auth-token');
 
-    return this.http.put<Hero>(this.heroesUrl, hero, httpOptions)
+    return this.http.put<StatusReport>(this.heroesUrl, hero, httpOptions)
       .pipe(
         catchError(this.handleError('updateHero', hero))
       );

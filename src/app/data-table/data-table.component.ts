@@ -2,13 +2,14 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { HeroesComponent } from '../heroes/heroes.component';
-import { DataTableDataSource, DataTableItem } from './data-table-datasource';
-import { HeroesService } from '../heroes/heroes.service';
+import { DataTableDataSource, DataTableItem} from './data-table-datasource';
+import { DataTableService } from './data-table.service';
+import { StatusReport } from './statusReport';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
+  providers: [DataTableService],
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements AfterViewInit {
@@ -20,13 +21,24 @@ export class DataTableComponent implements AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name'];
 
-  constructor() {
+  heroes: StatusReport[] = [];
+
+  constructor(private dataTableService: DataTableService) {
     this.dataSource = new DataTableDataSource();
   }
+
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+    this.getHeroes();
+  }
+
+  getHeroes(): void {
+    this.dataTableService.getHeroes()
+    .subscribe(heroes => (this.heroes = heroes));
+    console.log(this.heroes);
+    //this.heroes = JSON.parse(this.heroString);
   }
 }

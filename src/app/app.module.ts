@@ -14,23 +14,17 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
-import {ConfigService} from './services/config.service';
-import { ConfigComponent } from './services/app-config/app-config.component';
-import { HeroesComponent } from './heroes/heroes.component';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 
 //This is a push test
-console.log ("test");
+//console.log ("test");
 @NgModule({
   declarations: [
     AppComponent,
     TopBarComponent,
     StatusUpdateTableComponent,
-    DataTableComponent,
-    ConfigComponent,
-    HeroesComponent,
-
+    DataTableComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +38,7 @@ console.log ("test");
     MatSortModule,
     HttpClientModule,
   ],
-  providers: [ConfigService,
-              HttpErrorHandler,
+  providers: [HttpErrorHandler,
               MessageService],
   bootstrap: [AppComponent]
 })
