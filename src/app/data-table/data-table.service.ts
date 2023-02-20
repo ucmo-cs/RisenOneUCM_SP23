@@ -8,83 +8,19 @@ import { catchError } from 'rxjs/operators';
 
 import { StatusReport } from './statusReport';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
+import { Reports } from './Report';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    Authorization: 'my-auth-token'
-  })
-};
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DataTableService {
-  heroesUrl = 'https://zx62abb126.execute-api.us-east-2.amazonaws.com/prod';  // URL to web api
-  private handleError: HandleError;
+
+   private baseURL = 'https://zx62abb126.execute-api.us-east-2.amazonaws.com/prod';
   
+   constructor(private http: HttpClient) { }
 
-
-  constructor(
-    private http: HttpClient,
-    httpErrorHandler: HttpErrorHandler) {
-    this.handleError = httpErrorHandler.createHandleError('HeroesService');
-  }
-
-  /** GET heroes from the server */
-  getHeroes(): Observable<StatusReport[]> {
-    return this.http.get<StatusReport[]>(this.heroesUrl)
-      .pipe(
-        catchError(this.handleError('getHeroes', []))
-      );
-  }
-
-  /* GET heroes whose name contains search term */
-  searchHeroes(term: string): Observable<StatusReport[]> {
-    term = term.trim();
-
-    // Add safe, URL encoded search parameter if there is a search term
-    const options = term ?
-     { params: new HttpParams().set('name', term) } : {};
-
-    return this.http.get<StatusReport[]>(this.heroesUrl, options)
-      .pipe(
-        catchError(this.handleError<StatusReport[]>('searchHeroes', []))
-      );
-  }
-
-  //////// Save methods //////////
-
-  /** POST: add a new hero to the database */
-  addHero(hero: StatusReport): Observable<StatusReport> {
-    return this.http.post<StatusReport>(this.heroesUrl, hero, httpOptions)
-      .pipe(
-        catchError(this.handleError('addHero', hero))
-      );
-  }
-
-  /** DELETE: delete the hero from the server */
-  deleteHero(id: number): Observable<unknown> {
-    const url = `${this.heroesUrl}/${id}`; // DELETE api/heroes/42
-    return this.http.delete(url, httpOptions)
-      .pipe(
-        catchError(this.handleError('deleteHero'))
-      );
-  }
-
-  /** PUT: update the hero on the server. Returns the updated hero upon success. */
-  updateHero(hero: StatusReport): Observable<StatusReport> {
-    httpOptions.headers =
-      httpOptions.headers.set('Authorization', 'my-new-auth-token');
-
-    return this.http.put<StatusReport>(this.heroesUrl, hero, httpOptions)
-      .pipe(
-        catchError(this.handleError('updateHero', hero))
-      );
-  }
+   getRandomUsers(): Observable<Reports> {
+    const URL = `${this.baseURL}`;
+    return this.http.get<Reports>(URL);
+   }
 }
-
-
-/*
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
-*/

@@ -1,29 +1,24 @@
-<div>
-<div class="mat-elevation-z8" >
-  <table mat-table class="full-width-table" matSort aria-label="Elements" layout = "row" layout-align ="center">
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
-      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+<div class="mat-elevation-z1">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="teststring">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Test String</th>
+      <td mat-cell *matCellDef="let element" class="left-text">  
+          
+      </td>
     </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-      <td mat-cell *matCellDef="let row">{{row.name}}</td>
-    </ng-container>
+    <!--<ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> 
+        <img src={{element.avatar}}  width="50" height="auto"  />
+      </td>
+    </ng-container>-->
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator #paginator
-      [length]="dataSource?.data?.length"
-      [pageIndex]="0"
-      [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 20]"
-      aria-label="Select page">
-  </mat-paginator>
-</div>
-<button type="button" (click)="getHeroes()">TEST</button>
+  <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
 </div>

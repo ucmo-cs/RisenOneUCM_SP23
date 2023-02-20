@@ -1,44 +1,56 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { DataTableDataSource, DataTableItem} from './data-table-datasource';
 import { DataTableService } from './data-table.service';
 import { StatusReport } from './statusReport';
+import { MatTableDataSource } from '@angular/material/table';
+import { Reports } from './Report';
+import { MatSnackBarModule, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
-  providers: [DataTableService],
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<DataTableItem>;
-  dataSource: DataTableDataSource;
+export class DataTableComponent implements OnInit, OnDestroy {
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  private subs = new Subscription();
 
-  heroes: StatusReport[] = [];
+  displayedColumns: string[] = ['teststring', ];//'status',];
 
-  constructor(private dataTableService: DataTableService) {
-    this.dataSource = new DataTableDataSource();
+  public dataSource: MatTableDataSource<Reports>;
+
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  private dataArray: string;
+
+  constructor(private financeService: DataTableService) { }
+
+  ngOnInit() {
+    this.subs.add(this.financeService.getRandomUsers()
+      .subscribe((res) => {
+        //console.log(res);
+        this.dataArray =  JSON.stringify(res);
+
+        this.dataSource = new MatTableDataSource<Reports>(this.dataArray);
+        //console.log(this.dataArray);
+        //this.dataSource.paginator = this.paginator;
+        //this.dataSource.sort = this.sort;
+      },
+        (err: HttpErrorResponse) => {
+          console.log(err);
+        }));
   }
 
-
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
-    this.getHeroes();
+  ngOnDestroy() {
+    if (this.subs) {
+      this.subs.unsubscribe();
+    }
   }
-
-  getHeroes(): void {
-    this.dataTableService.getHeroes()
-    .subscribe(heroes => (this.heroes = heroes));
-    console.log(this.heroes);
-    //this.heroes = JSON.parse(this.heroString);
-  }
+  
 }
