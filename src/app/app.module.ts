@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { StatusUpdateTableComponent } from './status-update-table/status-update-table.component';
 import { DataTableComponent } from './data-table/data-table.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -23,7 +22,6 @@ import { MessageService } from './message.service';
   declarations: [
     AppComponent,
     TopBarComponent,
-    StatusUpdateTableComponent,
     DataTableComponent
   ],
   imports: [
