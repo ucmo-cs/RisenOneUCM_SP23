@@ -2,14 +2,11 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
 import { DataTableService } from './data-table.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Reports } from './Report';
-import { MatSnackBarModule, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 
-export interface Test {
+export interface Report_Data {
   id: number,
   report_data: string,
   account_id: number
@@ -26,22 +23,22 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   displayedColumns: any[] = ['var1','var2',];
 
-  public dataSource: MatTableDataSource<Test>;
+  public dataSource: MatTableDataSource<Report_Data>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private dataArray: any;
 
-  constructor(private financeService: DataTableService) { }
+  constructor(private reportService: DataTableService) { }
 
   ngOnInit() {
-    this.subs.add(this.financeService.getRandomUsers()
+    this.subs.add(this.reportService.getAllReports()
       .subscribe((res) => {
         //console.log(res);
         this.dataArray =  JSON.parse(res.body);
         //console.log(this.dataArray.Items);
-        this.dataSource = new MatTableDataSource<Test>(this.dataArray.Items);
+        this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
         console.log(this.dataSource.data);
         //console.log(this.dataSource)
         //this.dataSource.paginator = this.paginator;

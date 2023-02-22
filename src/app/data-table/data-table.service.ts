@@ -6,7 +6,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
-import { Reports } from './Report';
+import { API_Data } from './api-data';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,8 @@ export class DataTableService {
   
    constructor(private http: HttpClient) { }
 
-   getRandomUsers(): Observable<Reports> {
+   getAllReports(): Observable<API_Data> {
     const URL = `${this.baseURL}`;
-    return this.http.get<Reports>(URL);
+    return this.http.get<API_Data>(URL);
    }
 }
