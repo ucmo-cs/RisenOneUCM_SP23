@@ -5,8 +5,6 @@ import { HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-
-import { StatusReport } from './statusReport';
 import { HttpErrorHandler, HandleError } from '../http-error-handler.service';
 import { Reports } from './Report';
 
