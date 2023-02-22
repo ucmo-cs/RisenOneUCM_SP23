@@ -1,15 +1,15 @@
 <div class="mat-elevation-z1">
   <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="body">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Test String</th>
-      <td mat-cell *matCellDef="let element" class="left-text">{{element.body}}</td>
+    <ng-container matColumnDef="var1">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Account ID</th>
+      <td mat-cell *matCellDef="let element" class="left-text">{{element.id}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="statusCode">
-      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
+    <ng-container matColumnDef="var2">
+      <th mat-header-cell *matHeaderCellDef  mat-sort-header> Report Data </th>
       <td mat-cell *matCellDef="let element" class="left-text"> 
-        {{element.statusCode}}
+        {{element.report_data}}
       </td>
     </ng-container>
 

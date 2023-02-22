@@ -1,4 +1,5 @@
 export interface Reports {
-    body:  string,
-    statusCode: number,
+
+      statusCode: number;
+      body: string;
   }
