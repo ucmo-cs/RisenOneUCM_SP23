@@ -5,14 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { DataTableService } from './data-table.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
-
-export interface Report_Data {
-  date: string,
-  id: number,
-  account_id: number,
-  projects: string,
-  report_status: string,
-}
+import { Report_Data } from './report_data';
 
 @Component({
   selector: 'app-data-table',
