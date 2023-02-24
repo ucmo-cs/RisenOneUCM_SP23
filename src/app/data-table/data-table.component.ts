@@ -7,9 +7,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export interface Report_Data {
+  date: string,
   id: number,
-  report_data: string,
-  account_id: number
+  account_id: number,
+  projects: string,
+  report_status: string,
 }
 
 @Component({
@@ -21,7 +23,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
 
-  displayedColumns: any[] = ['var1','var2',];
+  displayedColumns: any[] = ['var1','var2','var3',];
 
   public dataSource: MatTableDataSource<Report_Data>;
 
