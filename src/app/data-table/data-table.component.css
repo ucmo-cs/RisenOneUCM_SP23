@@ -1,9 +1,27 @@
 table {
   width: 100%;
+  place-self: center;
+  background-color: rgb(249, 79, 79);
 }
-mat-header-cell, mat-cell {
+mat-cell {
   justify-content: left;
+  color: black;
+}
+mat-header-cell{
+  background-color: rgb(60, 59, 58);
+  color: black;
+}
+mat-row{
+  background-color: rgb(255, 0, 0);
+  color: black;
+}
+.header-row-class{
+  background-color: rgb(255, 0, 0);
+  color: black;
 }
 .left-text {
   text-align: left;
+}
+.status-class{
+  text-align: center;
 }
