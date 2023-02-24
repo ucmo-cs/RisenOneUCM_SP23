@@ -23,7 +23,7 @@
 /* styling for the outer part of the report table*/
 .inner-report-class{
     width:75%;
-    background-color:rgb(255, 255, 255);
+    background-color:rgb(58, 122, 211);
     padding:25px;
     place-self: center;
     display:grid;
