@@ -9,6 +9,9 @@ td{
 th{
   color:black;
 }
+tr{
+  border-color:black;
+}
 mat-elevation-z1{
   border-radius: 100px;
 }
@@ -35,6 +38,7 @@ mat-row{
   text-align: center;
 }
 mat-paginator{
+  color: black;
   background-color:transparent;
 }
 button{

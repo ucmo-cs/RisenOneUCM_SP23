@@ -29,7 +29,7 @@
     place-self: center;
     display:flex;
     flex-direction: column;
-    border-radius:5%;
+    border-radius:30px;
 }
 /* test div for styling the buttons in the top bar */
 .top-bar-buttons{
