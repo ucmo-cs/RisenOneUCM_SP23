@@ -32,9 +32,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
       .subscribe((res) => {
         //console.log(res);
         this.dataArray =  JSON.parse(res.body);
-        //console.log(this.dataArray.Items);
+        //console.log(this.dataArray.Items[0].report_status);
+        for(let i = 0; i < this.dataArray.Items.length; i++){
+            if(this.dataArray.Items[i].report_status === "Missing"){
+              this.dataArray.Items[i].report_status = "<b>Missing</b>";
+            }
+        }
         this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
-        console.log(this.dataSource.data);
+        //console.log(this.dataSource.data);
         //console.log(this.dataSource)
         //this.dataSource.paginator = this.paginator;
         //this.dataSource.sort = this.sort;
