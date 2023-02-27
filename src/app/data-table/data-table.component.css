@@ -37,9 +37,13 @@ mat-row{
 .status-class{
   text-align: center;
 }
+.table-header{
+  background-color: rgb(255, 195, 76);
+}
 mat-paginator{
   color: black;
   background-color:transparent;
+  color:black;
 }
 button{
   color:black;
