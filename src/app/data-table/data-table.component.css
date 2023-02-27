@@ -2,15 +2,18 @@ table {
   width: 100%;
   place-self: center;
   background-color: rgb(255, 255, 255);
+  border:1px outset rgba(128, 128, 128, 0.688);
 }
 td{
   color: black;
+  border-color:rgba(128, 128, 128, 0.688);
 }
 th{
-  color:black;
+  color:rgb(255, 255, 255);
+  border-color:rgba(128, 128, 128, 0.688);
 }
 tr{
-  border-color:black;
+  border-color:rgba(128, 128, 128, 0.688);
 }
 mat-elevation-z1{
   border-radius: 100px;
@@ -20,7 +23,6 @@ mat-cell {
   color: black;
 }
 mat-header-cell{
-  background-color: rgb(60, 59, 58);
   color: black;
 }
 mat-row{
@@ -28,8 +30,7 @@ mat-row{
   color: black;
 }
 .header-row-class{
-  background-color: rgb(255, 0, 0);
-  color: black;
+
 }
 .left-text {
   text-align: left;
