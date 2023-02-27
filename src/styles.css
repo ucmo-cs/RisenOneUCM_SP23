@@ -15,18 +15,21 @@
 /* styling for the background on Reports page */
 .outer-report-class{
     width: 100%;
-    height:580px;
+    height:100vh;
     background-color:rgb(255, 195, 76);
-    display:grid;
+    display:flex;
     align-items: center;
+    justify-content: center;
 }
 /* styling for the outer part of the report table*/
 .inner-report-class{
-    width:75%;
-    background-color:rgb(58, 122, 211);
-    padding:25px;
+    width:75vw;
+    background-color:rgb(255, 255, 255);
+    padding:5px 40px 25px 40px;
     place-self: center;
-    display:grid;
+    display:flex;
+    flex-direction: column;
+    border-radius:5%;
 }
 /* test div for styling the buttons in the top bar */
 .top-bar-buttons{
