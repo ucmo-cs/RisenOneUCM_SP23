@@ -44,9 +44,8 @@ mat-row{
 mat-paginator{
   color: black;
   background-color:transparent;
-  color:black;
 }
-button{
-  color:black;
-  background-color: white;
+
+mat-toolbar{
+  background-color: transparent;
 }

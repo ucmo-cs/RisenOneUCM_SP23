@@ -28,11 +28,34 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-
-  <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
-  <button mat-raised-button >
+  <!--
+  <div class = "bottom-bar-left">
+    <button mat-raised-button >
     Filter <i class="material-icons">filter_alt</i>
-    </button>
-  <button mat-raised-button>Add Report</button>
-  <button mat-raised-button>Export Data</button>
+      </button>
+  </div>
+  <div class = "bottom-bar-center"></div>
+      <button mat-raised-button color = "accent">Add Report</button>
+      <button mat-raised-button>Export Data</button>
+  </div>
+  <div class = "bottom-bar-right">
+    <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+  </div>
+-->
+
+<mat-toolbar>
+  <div class = "bottom-bar-left">
+    <button mat-raised-button >
+    Filter <i class="material-icons">filter_alt</i>
+      </button>
+  </div>
+  <div class = "bottom-bar-center">
+      <button mat-raised-button color = "accent">Add Report</button>
+      <button mat-raised-button>Export Data</button>
+  </div>
+  <div class = "bottom-bar-right">
+    <mat-paginator [pageSizeOptions]="[5]"></mat-paginator>
+  </div>
+</mat-toolbar>  
+
 </div>
