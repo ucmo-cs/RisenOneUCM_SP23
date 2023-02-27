@@ -1,8 +1,13 @@
 table {
   width: 100%;
   place-self: center;
-  background-color: rgb(249, 79, 79);
-
+  background-color: rgb(255, 255, 255);
+}
+td{
+  color: black;
+}
+th{
+  color:black;
 }
 mat-elevation-z1{
   border-radius: 100px;
@@ -28,4 +33,11 @@ mat-row{
 }
 .status-class{
   text-align: center;
+}
+mat-paginator{
+  background-color:transparent;
+}
+button{
+  color:black;
+  background-color: white;
 }
