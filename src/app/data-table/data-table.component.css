@@ -14,6 +14,7 @@ th{
 }
 tr{
   border-color:rgba(128, 128, 128, 0.688);
+  height:5vh !important;
 }
 mat-elevation-z1{
   border-radius: 100px;
@@ -41,6 +42,7 @@ mat-row{
 .table-header{
   background-color: rgb(255, 195, 76);
 }
+
 mat-paginator{
   color: black;
   background-color:transparent;
