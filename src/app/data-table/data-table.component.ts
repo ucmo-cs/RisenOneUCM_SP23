@@ -20,7 +20,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   public dataSource: MatTableDataSource<Report_Data>;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private dataArray: any;
@@ -39,6 +39,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
             }
         }
         this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
+        this.dataSource.paginator = this.paginator;
         //console.log(this.dataSource.data);
         //console.log(this.dataSource)
         //this.dataSource.paginator = this.paginator;
