@@ -28,9 +28,6 @@
     flex-direction: column;
     border-radius:30px;
 }
-/* test div for styling the buttons in the top bar */
-.top-bar-buttons{
-}
 html, body { 
     height: 100%; 
 }

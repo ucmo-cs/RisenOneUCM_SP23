@@ -34,8 +34,9 @@ mat-row{
   background-color: rgb(255, 0, 0);
   color: black;
 }
-.header-row-class{
-
+mat-form-field{
+  color:transparent;
+  background-color: transparent;
 }
 .left-text {
   text-align: left;

@@ -30,9 +30,13 @@
       </table>
   <mat-toolbar>
   <div class = "bottom-bar-left">
-  <button mat-raised-button>
+  <!--<button mat-raised-button>
     Filter <i class="material-icons">filter_alt</i>
-      </button>
+      </button>-->
+      <mat-form-field appearance="outline">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
+    </mat-form-field>
   </div>
   <div class = "bottom-bar-center">
       <button mat-raised-button color = "accent">Add Report</button>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, HammerGestureConfig } from '@angular/platform-browser';
-
+import {MatFormFieldModule} from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -15,6 +15,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
+import { MatInputModule } from '@angular/material/input';
 
 //This is a push test
 //console.log ("test");
@@ -35,6 +36,8 @@ import { MessageService } from './message.service';
     MatPaginatorModule,
     MatSortModule,
     HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [HttpErrorHandler,
               MessageService],

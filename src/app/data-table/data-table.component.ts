@@ -50,6 +50,11 @@ export class DataTableComponent implements OnInit, OnDestroy {
         }));
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ngOnDestroy() {
     if (this.subs) {
       this.subs.unsubscribe();
