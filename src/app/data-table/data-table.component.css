@@ -1,8 +1,12 @@
 table {
+  table-layout: fixed;
   width: 100%;
   place-self: center;
   background-color: rgb(255, 255, 255);
   border:1px outset rgba(128, 128, 128, 0.688);
+}
+th, td{
+  word-wrap: break-word;
 }
 td{
   color: black;
@@ -44,6 +48,11 @@ mat-row{
 mat-paginator{
   color: black;
   background-color:transparent;
+  
+}
+
+.mat-paginator-icon-buton{
+  color: yellow;
 }
 
 mat-toolbar{

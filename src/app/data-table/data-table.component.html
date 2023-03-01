@@ -6,19 +6,19 @@
     <div class="mat-elevation-z1;">
       <table mat-table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="var1">
+    <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef  mat-sort-header class="table-header">Date</th>
       <td mat-cell *matCellDef="let element" class="left-text">{{element.date}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="var2">
+    <ng-container matColumnDef="projects">
       <th mat-header-cell *matHeaderCellDef  mat-sort-header class="table-header"> Projects </th>
       <td mat-cell *matCellDef="let element" class="left-text"> 
         {{element.projects}}
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="var3">
+    <ng-container matColumnDef="report_status">
       <th mat-header-cell *matHeaderCellDef  mat-sort-header class="table-header" > Status </th>
       <td mat-cell *matCellDef="let element" class="left-text"> 
         <div [innerHTML] = "element.report_status"></div>
@@ -39,7 +39,7 @@
       <button mat-raised-button>Export Data</button>
   </div>
   <div class = "bottom-bar-right">
-    <mat-paginator [pageSizeOptions]="[1, 5, 10]"
+    <mat-paginator [pageSizeOptions]="[5]"
                  showFirstLastButtons
                  aria-label="Select page of periodic elements">
   </mat-paginator>

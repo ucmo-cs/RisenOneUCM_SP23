@@ -16,7 +16,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
 
-  displayedColumns: any[] = ['var1','var2','var3',];
+  displayedColumns: any[] = ['date','projects','report_status',];
 
   public dataSource: MatTableDataSource<Report_Data>;
 
@@ -43,7 +43,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         //console.log(this.dataSource.data);
         //console.log(this.dataSource)
         //this.dataSource.paginator = this.paginator;
-        //this.dataSource.sort = this.sort;
+        this.dataSource.sort = this.sort;
       },
         (err: HttpErrorResponse) => {
           console.log(err);
