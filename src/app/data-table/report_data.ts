@@ -4,4 +4,4 @@ export interface Report_Data {
     account_id: number,
     projects: string,
     report_status: string,
-  }
+}
