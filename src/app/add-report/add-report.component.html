@@ -8,10 +8,10 @@
         <div class ="report-buttons-column">
             <h3>Report Text</h3>
             <!--text area just for testing-->
-            <textarea>Report Text goes here</textarea>
+            <textarea id = "report_text">Report Text goes here</textarea>
             <div class = "buttons-row">
-                <button>Cancel</button>
-                <button>Save</button>
+                <button (click) = "closeWindow()">Cancel</button>
+                <button (click)="onSave()">Save</button>
             </div>
         </div>
     </div>
