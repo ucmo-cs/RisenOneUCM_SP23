@@ -39,6 +39,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
             }
         }
         this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
+      
         this.dataSource.paginator = this.paginator;
         //console.log(this.dataSource.data);
         //console.log(this.dataSource)

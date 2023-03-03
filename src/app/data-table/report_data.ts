@@ -1,7 +1,8 @@
 export interface Report_Data {
     date: string,
-    id: number,
-    account_id: number,
+    id: string,
+    account_id: string,
     projects: string,
     report_status: string,
+    report_text: string,
 }

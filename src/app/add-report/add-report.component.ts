@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AddReportService } from './add-report.service';
 import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/report_data';
 
@@ -13,22 +13,25 @@ export class AddReportComponent {
 
   reportData:Report_Data;
 
+
   populateData(){
     //this.reportData.projects()
+    document.getElementById("report_text")?.innerHTML;
+    
   }
 
   onSave(){
-    
-    /*try{
-    this.addreportService.saveReport(this.reportData);
+    this.populateData();
+    //if()
+    try{
+      this.addreportService.saveReport(this.reportData);
     }
     catch(exception){
       return exception;
-    }*/
+    }
   }
 
   closeWindow(){
-    console.log(this.reportData);
     window.self.close();
   }
 }
