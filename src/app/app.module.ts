@@ -16,6 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { MatInputModule } from '@angular/material/input';
+import { AddReportComponent } from './add-report/add-report.component';
 
 //This is a push test
 //console.log ("test");
@@ -23,7 +24,8 @@ import { MatInputModule } from '@angular/material/input';
   declarations: [
     AppComponent,
     TopBarComponent,
-    DataTableComponent
+    DataTableComponent,
+    AddReportComponent
   ],
   imports: [
     BrowserModule,
