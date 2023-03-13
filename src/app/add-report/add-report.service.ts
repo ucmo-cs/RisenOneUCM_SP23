@@ -14,6 +14,14 @@ export class AddReportService {
 
     saveReport(exportBody:any){
         const URL = `${this.baseURL}`;
-        this.http.put<Report_Data>(URL, exportBody);
+        this.http.post<Report_Data>(URL, exportBody)
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          error => {
+               console.log(error);
+              }
+        );
     }
 }
