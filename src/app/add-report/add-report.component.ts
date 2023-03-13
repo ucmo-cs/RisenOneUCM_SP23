@@ -58,7 +58,7 @@ export class AddReportComponent {
       this.reportData.Item.date = dateBuffer;
       this.reportData.Item.projects = "TBD";
       
-      this.reportData.Item.project_text = "Test";//String(document.getElementById("report_text")?.innerHTML);
+      this.reportData.Item.project_text = String(document.getElementById("report_text")?.innerHTML);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
