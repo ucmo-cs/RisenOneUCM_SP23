@@ -4,7 +4,7 @@
       <h1 class="status-class">Employee Status Update</h1>
     
     <div class="mat-elevation-z1;">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table id = "dataTable" mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef  mat-sort-header class="table-header">Date</th>
@@ -41,7 +41,7 @@
   </div>
   <div class = "bottom-bar-center">
       <button mat-raised-button color = "accent" (click)="openDialog()">Add Report</button>
-      <button mat-raised-button>Export Data</button>
+      <button mat-raised-button (click) = "openPDF()">Export Data</button>
   </div>
   <div class = "bottom-bar-right">
     <mat-paginator [pageSizeOptions]="[10]"

@@ -8,6 +8,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Report_Data } from './report_data';
 import {MatDialogRef, MatDialog} from '@angular/material/dialog';
 import {AddReportComponent} from '../add-report/add-report.component'
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -64,9 +67,23 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
   openDialog(): void{
     const dialogRef = this.matDialog.open(AddReportComponent, {
-      
+      height: '40%',
+      width: '60%'
     })
   }
 
+  public openPDF(): void {
+    let DATA: any = document.getElementById('dataTable');
+    html2canvas(DATA).then((canvas) => {
+      let fileWidth = 208;
+      let fileHeight = (canvas.height * fileWidth) / canvas.width;
+      const FILEURI = canvas.toDataURL('image/png');
+      let PDF = new jsPDF('p', 'mm', 'a4');
+      let position = 0;
+      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+      PDF.save('angular-demo.pdf');
+    });
+
   
+  }
 }

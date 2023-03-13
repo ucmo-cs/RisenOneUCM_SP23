@@ -1,13 +1,9 @@
 .wrapper{
-    border:1px solid gray;
-    border-radius:30px;
-    width:fit-content;
+    width:100%;
 }
 
 .column-wrapper{
-    display:flex;
-    flex-direction: row;
-    padding:8px;
+    padding:2px;
 }
 .buttons-row{
     display:flex;
