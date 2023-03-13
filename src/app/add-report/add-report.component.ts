@@ -23,7 +23,10 @@ export class AddReportComponent {
   date:string;
   report:string;
 
-  constructor(private addreportService: AddReportService, public dialog: MatDialog) { }
+  constructor(
+    public dialogRef: MatDialogRef<AddReportComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: AddReportData,private addreportService: AddReportService,public dialog: MatDialog) {}
+  
 
   reportData = {
     "TableName": "Report",
@@ -48,7 +51,6 @@ export class AddReportComponent {
       return text;
   }
   
-  
 
   populateData(){
     try{
@@ -56,7 +58,7 @@ export class AddReportComponent {
       this.reportData.Item.date = dateBuffer;
       this.reportData.Item.projects = "TBD";
       
-      this.reportData.Item.project_text = String(document.getElementById("report_text")?.innerHTML);
+      this.reportData.Item.project_text = "Test";//String(document.getElementById("report_text")?.innerHTML);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
@@ -85,21 +87,8 @@ export class AddReportComponent {
     }
   }
 
-  closeWindow(){
-    window.self.close();
-  }
-}
-@Component({
-  selector: 'add-report-popup',
-  templateUrl: './add-report-popup.html',
-})
-export class AddReportPopup {
-  constructor(
-    public dialogRef: MatDialogRef<AddReportPopup>,
-    @Inject(MAT_DIALOG_DATA) public data: AddReportData,
-  ) {}
-
   onNoClick(): void {
     this.dialogRef.close();
   }
+//}
 }

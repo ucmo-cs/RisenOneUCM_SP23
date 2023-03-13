@@ -17,7 +17,7 @@ import { HttpErrorHandler } from './http-error-handler.service';
 import { MessageService } from './message.service';
 import { MatInputModule } from '@angular/material/input';
 import { AddReportComponent } from './add-report/add-report.component';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { MatDialogModule,MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 //This is a push test
 //console.log ("test");
@@ -45,10 +45,12 @@ import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/d
   ],
   providers: [HttpErrorHandler,
               MessageService,
-              { 
-                provide: MAT_DIALOG_DEFAULT_OPTIONS, 
-                useValue: {hasBackdrop: false}
-              }
+              {
+                provide: MatDialogRef,
+                useValue: {}
+              },
+              { provide: MAT_DIALOG_DATA, useValue: {} },
+    // { provide: MdDialogRef, useValue: {} }, --> deprecated
             ],
   bootstrap: [AppComponent]
 })
