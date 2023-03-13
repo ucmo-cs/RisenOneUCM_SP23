@@ -1,8 +1,16 @@
 import { Element } from '@angular/compiler';
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 import { elementAt } from 'rxjs';
 import { AddReportService } from './add-report.service';
 import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/report_data';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { DialogRef } from '@angular/cdk/dialog';
+
+export interface AddReportData{
+  name:string,
+  date:string,
+  report:string,
+}
 
 @Component({
   selector: 'app-add-report',
@@ -10,7 +18,12 @@ import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/rep
   styleUrls: ['./add-report.component.css']
 })
 export class AddReportComponent {
-  constructor(private addreportService: AddReportService) { }
+
+  name:string;
+  date:string;
+  report:string;
+
+  constructor(private addreportService: AddReportService, public dialog: MatDialog) { }
 
   reportData = {
     "TableName": "Report",
@@ -74,5 +87,19 @@ export class AddReportComponent {
 
   closeWindow(){
     window.self.close();
+  }
+}
+@Component({
+  selector: 'add-report-popup',
+  templateUrl: './add-report-popup.html',
+})
+export class AddReportPopup {
+  constructor(
+    public dialogRef: MatDialogRef<AddReportPopup>,
+    @Inject(MAT_DIALOG_DATA) public data: AddReportData,
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

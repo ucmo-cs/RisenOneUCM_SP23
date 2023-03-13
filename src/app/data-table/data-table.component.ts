@@ -6,7 +6,8 @@ import { DataTableService } from './data-table.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Report_Data } from './report_data';
-
+import {MatDialogRef, MatDialog} from '@angular/material/dialog';
+import {AddReportComponent, AddReportPopup} from '../add-report/add-report.component'
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -25,7 +26,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   private dataArray: any;
 
-  constructor(private reportService: DataTableService) { }
+  constructor(private reportService: DataTableService, private matDialog: MatDialog) { }
 
   ngOnInit() {
     this.subs.add(this.reportService.getAllReports()
@@ -61,5 +62,11 @@ export class DataTableComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
+  openDialog(): void{
+    const dialogRef = this.matDialog.open(AddReportPopup, {
+      
+    })
+  }
+
   
 }

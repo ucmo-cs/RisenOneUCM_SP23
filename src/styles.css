@@ -35,5 +35,21 @@ body {
     margin: 0; 
     font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
+.wrapper{
+    border:1px solid gray;
+    border-radius:30px;
+    width:fit-content;
+}
 
+.column-wrapper{
+    display:flex;
+    flex-direction: row;
+    padding:8px;
+}
+.buttons-row{
+    display:flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: end;
+}
 
