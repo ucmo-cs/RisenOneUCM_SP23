@@ -3,8 +3,8 @@
 }
 
 .column-wrapper{
-    padding:2px;
 }
+
 .buttons-row{
     display:flex;
     flex-direction: row;

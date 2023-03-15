@@ -50,13 +50,15 @@ mat-form-field{
 
 mat-paginator{
   color: black;
-  background-color:transparent;
+  background-color: transparent;
 }
 
-.mat-paginator-icon-buton{
-  color: yellow;
-}
 
 mat-toolbar{
   background-color: transparent;
 }
+
+button{
+ 
+}
+

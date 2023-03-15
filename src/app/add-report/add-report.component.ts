@@ -78,8 +78,8 @@ export class AddReportComponent {
 
     try{
       this.addreportService.saveReport(this.reportData);
-      console.log(this.reportData);
-      //self.window.close();
+      //console.log(this.reportData);
+      this.dialogRef.close();
     }
     catch(exception){
       return exception;
