@@ -55,10 +55,31 @@ mat-paginator{
 
 
 mat-toolbar{
+  padding-left: 0px;
+  padding-right: 0px;
   background-color: transparent;
+  max-width: 100%;
 }
 
 button{
- 
+  border-radius: 10px !important;
+  border-radius: 10px !important;
+}
+
+.testButton2{
+  color:rgba(255,195,76,1) !important;
+  --mdc-protected-button-container-color: white !important;
+  border-radius: 1px;
+  border-color: rgba(255,195,76,1)!important;
+}
+
+.bottom-bar-left{
+  max-width: 33.33%;
+}
+.bottom-bar-center{
+  max-width: 33.33%;
+}
+.bottom-bar-right{
+  max-width: 33.33%;
 }
 
