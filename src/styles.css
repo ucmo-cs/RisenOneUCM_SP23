@@ -3,7 +3,7 @@
 /* Basic prelim styling for the top-bar component
     based off the Angular.io/start tutorial */
 .mat-toolbar{
-    height: 15%;
+    height: 13%;
     background-color:rgb(0, 0, 0);
     padding: 16px;
     display: flex;

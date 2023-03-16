@@ -1,3 +1,5 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 <div class="outer-report-class">
   <div class="inner-report-class">
     
@@ -33,15 +35,19 @@
   <!--<button mat-raised-button>
     Filter <i class="material-icons">filter_alt</i>
       </button>-->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="fill">
         <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search columns" #input>
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search Columns" #input>
+        <mat-icon matSuffix>filter_list</mat-icon>
     </mat-form-field>
   </div>
   <div class = "bottom-bar-center">
+    <div class = "egg">
       <button class = "testButton1" mat-raised-button color = "primary" (click)="openDialog()">Add Report</button>
+    </div>
+    <div class = "egg2">
       <button class = "testButton2" mat-raised-button color = "primary"(click) = "openPDF()">Export Data</button>
+    </div>
   </div>
   <div class = "bottom-bar-right">
     <mat-paginator [pageSizeOptions]="[10]"

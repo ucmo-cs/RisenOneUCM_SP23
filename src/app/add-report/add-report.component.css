@@ -2,9 +2,6 @@
     width:100%;
 }
 
-.column-wrapper{
-}
-
 .buttons-row{
     display:flex;
     flex-direction: row;

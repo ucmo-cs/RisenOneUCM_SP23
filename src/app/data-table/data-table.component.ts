@@ -7,7 +7,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Report_Data } from './report_data';
 import {MatDialogRef, MatDialog} from '@angular/material/dialog';
-import {AddReportComponent} from '../add-report/add-report.component'
+import {AddReportComponent} from '../add-report/add-report.component';
+import {MatIconModule} from '@angular/material/icon';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 

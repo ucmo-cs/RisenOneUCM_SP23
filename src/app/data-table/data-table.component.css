@@ -48,6 +48,22 @@ mat-form-field{
   background-color: rgb(255, 195, 76);
 }
 
+.egg{
+  float: left;
+  padding-right: 5px;
+}
+.egg2{
+  float:right;
+}
+
+mat-icon{
+  color:black;
+}
+
+mat-form-field{
+  max-width: 90% !important;
+}
+
 mat-paginator{
   color: black;
   background-color: transparent;
@@ -62,8 +78,7 @@ mat-toolbar{
 }
 
 button{
-  border-radius: 10px !important;
-  border-radius: 10px !important;
+  border-radius: 20px !important;
 }
 
 .testButton2{
@@ -74,12 +89,13 @@ button{
 }
 
 .bottom-bar-left{
-  max-width: 33.33%;
+  padding-top: 5px;
+  max-width: 30.33%;
 }
 .bottom-bar-center{
-  max-width: 33.33%;
+  max-width: 39.33%;
 }
 .bottom-bar-right{
-  max-width: 33.33%;
+  max-width: 30.33%;
 }
 
