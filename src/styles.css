@@ -41,8 +41,6 @@ body {
     flex-direction: row;
     align-items: end;
     justify-content: end;
-.mat-mdc-dialog-container {
-    --mdc-dialog-container-color: #ffffff;
 }
 
 .mat-mdc-dialog-container {
