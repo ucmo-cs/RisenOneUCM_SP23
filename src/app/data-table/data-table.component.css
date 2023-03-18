@@ -56,6 +56,11 @@ mat-form-field{
   float:right;
 }
 
+.dataRow:hover{
+  background: #808080 !important;
+  color: black !important;
+}
+
 mat-icon{
   color:black;
 }
@@ -79,6 +84,7 @@ mat-toolbar{
 
 button{
   border-radius: 20px !important;
+  border-style: solid !important;
 }
 
 .testButton2{
@@ -98,4 +104,3 @@ button{
 .bottom-bar-right{
   max-width: 30.33%;
 }
-

@@ -84,7 +84,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('angular-demo.pdf');
     });
+  }
 
-  
+  getRecord(row: any){
+    console.log(row);
+  }
+
+  openDialogBoxFunction(){
+    
   }
 }

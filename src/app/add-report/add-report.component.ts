@@ -5,6 +5,7 @@ import { AddReportService } from './add-report.service';
 import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/report_data';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
+import { DataTableComponent } from '../data-table/data-table.component';
 
 export interface AddReportData{
   name:string,
@@ -84,6 +85,7 @@ export class AddReportComponent {
     catch(exception){
       return exception;
     }
+
   }
 
   onNoClick(): void {
