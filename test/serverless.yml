@@ -1,10 +1,47 @@
 service: test
 frameworkVersion: '3'
 
+custom:
+  tableName: 'Report'
+
 provider:
   name: aws
   runtime: nodejs18.x
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: 
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource:
+            - Fn::GetAtt: [ ReportsTable, Arn ]
+  environment:
+    REPORT_TABLE: ${self:custom.tableName}
 
 functions:
-  function1:
-    handler: index.handler
+  create:
+    handler: Lambda_Functions/addReport.handler
+    events:
+      - http:
+          path: reports
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    ReportsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:custom.tableName}
