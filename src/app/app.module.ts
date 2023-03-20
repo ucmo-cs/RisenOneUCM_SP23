@@ -18,7 +18,7 @@ import { MessageService } from './message.service';
 import { MatInputModule } from '@angular/material/input';
 import { AddReportComponent } from './add-report/add-report.component';
 import { MatDialogModule,MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
+import { ReactiveFormsModule } from '@angular/forms';
 //This is a push test
 //console.log ("test");
 @NgModule({
@@ -42,6 +42,7 @@ import { MatDialogModule,MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DA
     MatFormFieldModule,
     MatInputModule,
     MatDialogModule,
+    ReactiveFormsModule,
   ],
   providers: [HttpErrorHandler,
               MessageService,

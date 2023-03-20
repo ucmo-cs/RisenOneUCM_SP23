@@ -5,6 +5,7 @@ import { AddReportService } from './add-report.service';
 import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/report_data';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
+import { FormControl } from '@angular/forms';
 import { DataTableComponent } from '../data-table/data-table.component';
 
 export interface AddReportData{
@@ -20,10 +21,12 @@ export interface AddReportData{
 })
 export class AddReportComponent implements OnInit {
 
-  name:string;
-  date:string;
   report:string;
+  employeeNameControl = new FormControl('');
+  dateControl = new FormControl('');
+  reportTextControl = new FormControl('');
 
+  
   constructor(
     public dialogRef: MatDialogRef<AddReportComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {account_id: string,date:string,
