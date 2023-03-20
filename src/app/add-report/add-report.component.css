@@ -3,7 +3,14 @@
     border-radius:30px;
     background-color: white;
 }
-
+.column-wrapper{
+    display:flex;
+    flex-direction: row;
+}
+.title-name-date-column{
+    display:flex;
+    flex-direction:column;
+}
 .buttons-row{
     display:flex;
     flex-direction: row;
