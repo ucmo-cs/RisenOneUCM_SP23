@@ -14,8 +14,8 @@ exports.handler = async event => {
         const reports = await documentClient.scan(params).promise();
         
         response = {
-            statusCode: 200,
-            body: JSON.stringify(reports),
+            "statusCode": 200,
+            "body": JSON.stringify(reports),
         };
         
         //response = JSON.stringify(reports);
@@ -24,8 +24,8 @@ exports.handler = async event => {
     }catch(exception){
         console.error(exception);
         response = {
-            statusCode: 500,
-            body: JSON.stringify({"Message: " : exception}),
+            "statusCode": 500,
+            "body": JSON.stringify({"Message: " : exception}),
         };
     }
     
