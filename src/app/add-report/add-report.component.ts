@@ -35,7 +35,7 @@ export class AddReportComponent implements OnInit {
   
   ngOnInit(): void {
     if(this.data != undefined){
-      //console.log(this.data);
+      console.log(this.data);
       document.getElementById("report_text")!.innerText = this.data.project_text;
     }
   }
