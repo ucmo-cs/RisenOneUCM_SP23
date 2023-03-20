@@ -31,6 +31,13 @@ functions:
           path: reports
           method: post
           cors: true
+  list:
+    handler: Lambda_Functions/getReports.handler
+    events:
+      - http:
+          path: reports
+          method: get
+          cors: true
 
 resources:
   Resources:
