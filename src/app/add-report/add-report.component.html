@@ -2,13 +2,16 @@
     <div class = "column-wrapper">
         <div class ="title-name-date-column">
             <h1>Add Report</h1>
-            <h3>Employee Name</h3>
-            <h3>Date</h3>
+            <label for="employeeName">Employee Name: </label>
+            <input id="employeeName" type="text" [formControl]="employeeNameControl">
+            <label for="date">Date:</label>
+            <input id="date" type="date" [formControl]="dateControl">
+
         </div>
         <div class ="report-buttons-column">
-            <h3>Report Text</h3>
             <!--text area just for testing-->
-            <textarea id = "report_text" required>Report Text goes here</textarea>
+            <label for="report_text">Report Text</label>
+            <input id = "report_text" [formControl]="reportTextControl" required>
             <div class = "buttons-row">
                 <button (click)="onNoClick()">Cancel</button>
                 <button (click)="onSave()">Save</button>
