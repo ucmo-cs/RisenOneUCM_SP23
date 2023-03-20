@@ -100,7 +100,7 @@ export class AddReportComponent implements OnInit {
 
     }
   }
-  
+
   onNoClick(): void {
     this.dialogRef.close();
   }

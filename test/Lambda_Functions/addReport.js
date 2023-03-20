@@ -6,28 +6,27 @@ var AWS = require('aws-sdk');
 // Create the DynamoDB service object
 var ddb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
+
 exports.handler = async (event) => {
-    //return event;
-    //var response;
+    
     try{
+        let eventBuffer = JSON.parse('{"TableName": "Report", "Item":' + JSON.stringify(event.Item) +'}');
         
-        await ddb.put(event).promise();
+        await ddb.put(eventBuffer).promise();
         
         //console.log("test put");
         const response = {
-                "statusCode": 200,
-                "body": "Success"
+                statusCode: 200,
+                body: "Success"
         };
-        return response;
-        //console.log(data);   
-    
-            
+        return response;  
     }
+    
     catch(exception){
         console.error(exception);
         const response = {
-        "statusCode": 500,
-        "body": JSON.stringify(exception)
+        statusCode: 500,
+        body: exception
         }
         return response;
     }
