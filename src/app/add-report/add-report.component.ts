@@ -41,7 +41,6 @@ export class AddReportComponent implements OnInit {
   }
     
   reportData = {
-    "TableName": "Report",
     "Item": {
       "date": "",
       "id": "",
