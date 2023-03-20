@@ -28,7 +28,7 @@
     </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
-        <tr class = "dataRow" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRecord(row)"></tr>
+        <tr class = "dataRow" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialogBoxFunctionForEdit(row)"></tr>
       </table>
   <mat-toolbar>
   <div class = "bottom-bar-left">

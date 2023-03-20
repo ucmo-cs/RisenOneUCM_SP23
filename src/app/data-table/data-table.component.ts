@@ -66,11 +66,20 @@ export class DataTableComponent implements OnInit, OnDestroy {
       this.subs.unsubscribe();
     }
   }
-  openDialog(): void{
+  openDialog(optionalParam?: object): void{
     const dialogRef = this.matDialog.open(AddReportComponent, {
-      height: '40%',
-      width: '60%'
+      height: '50%',
+      width: '50%',
+      data: optionalParam,
     })
+
+    //test
+    /*
+    if (optionalParam){
+      console.log(optionalParam);
+    }
+    else{console.log("test");}
+    */
   }
 
   public openPDF(): void {
@@ -86,11 +95,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
     });
   }
 
-  getRecord(row: any){
-    console.log(row);
-  }
-
-  openDialogBoxFunction(){
-    
+  openDialogBoxFunctionForEdit(row:any){
+    this.openDialog(row);
   }
 }
