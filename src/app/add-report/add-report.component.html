@@ -1,17 +1,24 @@
 <div class = "wrapper">
+    <h1>Add Report</h1>
     <div class = "column-wrapper">
         <div class ="title-name-date-column">
-            <h1>Add Report</h1>
-            <label for="employeeName">Employee Name: </label>
-            <input id="employeeName" type="text" [formControl]="employeeNameControl">
-            <label for="date">Date:</label>
-            <input id="date" type="date" [formControl]="dateControl">
+            <mat-form-field>
+                <input matInput id="employeeName" type="text" placeholder="Employee Name: " [formControl]="employeeNameControl">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Choose a Date</mat-label>
+                <input matInput [matDatepicker]="picker1" (dateInput)="addEvent('input',$event)" (dateChange)="addEvent('change', $event)">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
 
         </div>
         <div class ="report-buttons-column">
-            <!--text area just for testing-->
-            <label for="report_text">Report Text</label>
-            <input id = "report_text" [formControl]="reportTextControl" required>
+            <mat-form-field>
+            <label for="report_text">Report Text: </label>
+            <input matInput id = "report_text" type="text" [formControl]="reportTextControl" required>
+            </mat-form-field>
             <div class = "buttons-row">
                 <button (click)="onNoClick()">Cancel</button>
                 <button (click)="onSave()">Save</button>

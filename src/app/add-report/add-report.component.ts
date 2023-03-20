@@ -7,6 +7,7 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog
 import { DialogRef } from '@angular/cdk/dialog';
 import { FormControl } from '@angular/forms';
 import { DataTableComponent } from '../data-table/data-table.component';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
 export interface AddReportData{
   name:string,
@@ -50,8 +51,12 @@ export class AddReportComponent implements OnInit {
       "project_text": ""
     }
   };
+  events: string[]=[];
 
-  
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>){
+    this.events.push('${type}: ${event.value}');
+    console.log(this.events)
+  }
   makeRandom() {
     const lengthOfCode = 40;
     let possible = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -99,7 +104,6 @@ export class AddReportComponent implements OnInit {
 
     }
   }
-
   onNoClick(): void {
     this.dialogRef.close();
   }
