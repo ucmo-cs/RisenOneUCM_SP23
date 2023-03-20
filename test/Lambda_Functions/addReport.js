@@ -15,8 +15,8 @@ exports.handler = async (event) => {
         
         //console.log("test put");
         const response = {
-                statusCode: 200,
-                body: "Success"
+                "statusCode": 200,
+                "body": "Success"
         };
         return response;
         //console.log(data);   
@@ -26,8 +26,8 @@ exports.handler = async (event) => {
     catch(exception){
         console.error(exception);
         const response = {
-        statusCode: 500,
-        body: exception
+        "statusCode": 500,
+        "body": JSON.stringify(exception)
         }
         return response;
     }
