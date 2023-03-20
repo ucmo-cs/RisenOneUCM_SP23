@@ -15,18 +15,20 @@ exports.handler = async (event) => {
         await ddb.put(eventBuffer).promise();
         
         //console.log("test put");
-        const response = {
-                statusCode: 200,
-                body: "Success"
+        let response = {
+                "statusCode": 200,
+                "body": "Success"
         };
+        
+        
         return response;  
     }
     
     catch(exception){
         console.error(exception);
         const response = {
-        statusCode: 500,
-        body: exception
+        "statusCode": 500,
+        "body": exception
         }
         return response;
     }
