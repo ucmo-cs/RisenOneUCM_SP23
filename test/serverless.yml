@@ -19,7 +19,7 @@ provider:
             - dynamodb:UpdateItem
             - dynamodb:DeleteItem
           Resource:
-            - Fn::GetAtt: [ ReportsTable, Arn ]
+            - "arn:aws:dynamodb:us-east-2:076692945864:table/Report"
   environment:
     REPORT_TABLE: ${self:custom.tableName}
 
@@ -38,17 +38,3 @@ functions:
           path: reports
           method: get
           cors: true
-
-resources:
-  Resources:
-    ReportsTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:custom.tableName}
