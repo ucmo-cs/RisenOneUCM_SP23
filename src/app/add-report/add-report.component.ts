@@ -19,7 +19,7 @@ export interface AddReportData{
   templateUrl: './add-report.component.html',
   styleUrls: ['./add-report.component.css']
 })
-export class AddReportComponent {
+export class AddReportComponent implements OnInit {
 
   report:string;
   employeeNameControl = new FormControl('');
@@ -29,9 +29,17 @@ export class AddReportComponent {
   
   constructor(
     public dialogRef: MatDialogRef<AddReportComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: AddReportData,private addreportService: AddReportService,public dialog: MatDialog) {}
+    @Inject(MAT_DIALOG_DATA) public data: {account_id: string,date:string,
+      id: string, project_text: string, projects: string, report_status: string},
+      private addreportService: AddReportService,public dialog: MatDialog) {}
   
-
+  ngOnInit(): void {
+    if(this.data != undefined){
+      //console.log(this.data);
+      document.getElementById("report_text")!.innerText = this.data.project_text;
+    }
+  }
+    
   reportData = {
     "TableName": "Report",
     "Item": {
@@ -73,26 +81,29 @@ export class AddReportComponent {
   }
 
   onSave(){
-    try{
-      this.populateData();
-    }
-    catch(exception){
-      return exception;
-    }
+    if(this.data == undefined){
+      try{
+        this.populateData();
+      }
+      catch(exception){
+        return exception;
+      }
 
-    try{
-      this.addreportService.saveReport(this.reportData);
-      //console.log(this.reportData);
-      this.dialogRef.close();
-    }
-    catch(exception){
-      return exception;
-    }
+      try{
+        this.addreportService.saveReport(this.reportData);
+        //console.log(this.reportData);
+        this.dialogRef.close();
+      }
+      catch(exception){
+        return exception;
+      }
 
+    }
   }
-
+  
   onNoClick(): void {
     this.dialogRef.close();
   }
+
 //}
 }
