@@ -17,7 +17,7 @@
         <div class ="report-buttons-column">
             <mat-form-field>
             <label for="report_text">Report Text: </label>
-            <input matInput id = "report_text" type="text" [formControl]="reportTextControl" (change) = "onChangeFunc()" required>
+            <input matInput type="text" [formControl]="reportTextControl" (change) = "onChangeFunc()" required>
             </mat-form-field>
             <div class = "buttons-row">
                 <button (click)="onNoClick()">Cancel</button>
