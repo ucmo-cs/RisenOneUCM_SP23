@@ -7,7 +7,7 @@
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Choose a Date</mat-label>
-                <input matInput [matDatepicker]="picker1" (dateChange)="addEvent('change', $event)">
+                <input matInput [matDatepicker]="picker1" (dateInput)="addEvent('change', $event)" [formControl]="dateControl">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
@@ -16,8 +16,6 @@
         </div>
         <div class ="report-buttons-column">
             <mat-form-field>
-            <label for="report_text">Report Text: </label>
-            <input matInput type="text" [formControl]="reportTextControl" (change) = "onChangeFunc()" required>
             <mat-label for="report_text">Report Text: </mat-label>
             <textarea matInput cdkTextareaAutosize 
             #autosize="cdkTextareaAutosize"
