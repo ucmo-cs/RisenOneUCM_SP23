@@ -41,3 +41,11 @@ functions:
           path: reports
           method: get
           cors: true
+
+  get:
+    handler: Lambda_Functions/getOneReport.handler
+    events:
+      - http:
+          path: reports/{id}/{account_id}
+          method: get
+          cors: true
