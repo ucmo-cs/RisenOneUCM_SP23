@@ -54,8 +54,8 @@ export class AddReportComponent implements OnInit {
   events: string[]=[];
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>){
-    this.events.push('${type}: ${event.value}');
-    console.log(this.events)
+    this.events.push(type+':'+ event.value);
+    console.log(this.events);
   }
   makeRandom() {
     const lengthOfCode = 40;
