@@ -2,6 +2,7 @@
     border:1px solid gray;
     border-radius:30px;
     background-color: white;
+    max-width: 90%;
 }
 .column-wrapper{
     display:flex;

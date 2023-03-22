@@ -69,7 +69,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
   openDialog(optionalParam?: object): void{
     const dialogRef = this.matDialog.open(AddReportComponent, {
       height: '50%',
-      width: '50%',
+      width: '500px',
       data: optionalParam,
     })
 
