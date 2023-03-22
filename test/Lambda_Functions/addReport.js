@@ -10,17 +10,26 @@ var ddb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 exports.handler = async (event) => {
     let response;
     try{
-        let eventBuffer = JSON.parse('{"TableName": "Report", "Item":' + JSON.stringify(event.Item) +'}');
+        const eventBuffer = {
+            "TableName": "Report",
+            "Item": JSON.parse(event.body)
+        };
         
         await ddb.put(eventBuffer).promise();
         
         //console.log("test put");
-        response = JSON.stringify(JSON.parse('{"statusCode": 200,"body": "Success"}'));
+        response = {
+            "statusCode": 200,
+            "body": "Success"
+        };
     }
     
     catch(exception){
         //console.error(exception);
-        response = JSON.stringify(JSON.parse('{"statusCode": 500,"body": ${exception}'));
+        response = {
+            "statusCode": 500,
+            "body": JSON.stringify(exception)
+        };
     }
     
     return response; 
