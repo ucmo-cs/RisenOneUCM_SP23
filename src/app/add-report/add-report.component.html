@@ -1,5 +1,5 @@
 <div class = "wrapper">
-    <h1>Add Report</h1>
+    <h1>Report</h1>
     <div class = "column-wrapper">
         <div class ="title-name-date-column">
             <mat-form-field>
@@ -17,7 +17,7 @@
         <div class ="report-buttons-column">
             <mat-form-field>
             <label for="report_text">Report Text: </label>
-            <input matInput id = "report_text" type="text" [formControl]="reportTextControl" required>
+            <input matInput id = "report_text" type="text" [formControl]="reportTextControl" (change) = "onChangeFunc()" required>
             </mat-form-field>
             <div class = "buttons-row">
                 <button (click)="onNoClick()">Cancel</button>

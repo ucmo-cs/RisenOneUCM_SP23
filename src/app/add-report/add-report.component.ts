@@ -108,5 +108,8 @@ export class AddReportComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  onChangeFunc(){
+    console.log("test");
+  }
 //}
 }
