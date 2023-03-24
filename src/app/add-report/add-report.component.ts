@@ -27,7 +27,7 @@ export class AddReportComponent implements OnInit {
 
   report:string;
   employeeNameControl = new FormControl('');
-  dateControl = new FormControl('');
+  dateControl = new FormControl(new Date());
   reportTextControl = new FormControl('');
 
   
@@ -62,8 +62,14 @@ export class AddReportComponent implements OnInit {
   events: string[]=[];
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>){
-    this.events.push(type+':'+ event.value);
+    this.events.push(type+":"+ event.value);
     console.log(this.events);
+    console.log();
+  }
+  toFormattedDate(iso: string) {
+    const date = new Date(iso);
+    console.log(date);
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
   makeRandom() {
     const lengthOfCode = 40;
