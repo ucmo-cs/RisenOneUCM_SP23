@@ -37,7 +37,11 @@ export class AddReportComponent implements OnInit {
   ngOnInit(): void {
     if(this.data != undefined){
       console.log(this.data);
+      console.log(this.data.project_text);
       document.getElementById("report_text")!.innerText = this.data.project_text;
+      this.reportTextControl.reset(this.data.project_text);
+      this.dateControl.reset(this.data.date);
+      console.log(this.dateControl);
     }
   }
     
@@ -51,6 +55,7 @@ export class AddReportComponent implements OnInit {
       "project_text": ""
     }
   };
+
   events: string[]=[];
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>){
@@ -73,7 +78,7 @@ export class AddReportComponent implements OnInit {
       let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
       this.reportData.Item.date = dateBuffer;
       this.reportData.Item.projects = "TBD";
-      this.reportData.Item.project_text = String(document.getElementById("report_text")?.innerHTML);
+      this.data.project_text = String(document.getElementById("report_text")?.innerHTML);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
