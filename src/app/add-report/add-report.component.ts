@@ -39,11 +39,11 @@ export class AddReportComponent implements OnInit {
   
   ngOnInit(): void {
     if(this.data != undefined){
-      console.log(this.data);
-      console.log(this.data.project_text);
+      //console.log(this.data);
+      //console.log(this.data.project_text);
       document.getElementById("report_text")!.innerText = this.data.project_text;
       this.reportTextControl.reset(this.data.project_text);
-      this.dateControl.reset(this.data.date);
+      (document.getElementById("date") as HTMLInputElement).value 
       this.employeeNameControl.reset(this.data.account_id);
     }
   }
@@ -79,8 +79,8 @@ export class AddReportComponent implements OnInit {
   populateData(){
     try{
       
-      let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
-      this.reportData.Item.date = dateBuffer;
+      //let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
+      this.reportData.Item.date = (document.getElementById("date") as HTMLInputElement).value;//dateBuffer;
       this.reportData.Item.projects = "TBD";
       this.reportData.Item.project_text = ((document.getElementById("report_text") as HTMLInputElement).value);
       this.reportData.Item.account_id = "0";
@@ -119,10 +119,7 @@ export class AddReportComponent implements OnInit {
   }
   onNoClick(): void {
     this.dialogRef.close();
-  }
-
-  onChangeFunc(){
-    console.log("test");
+    //console.log(((document.getElementById("date") as HTMLInputElement).value))
   }
 //}
 }
