@@ -74,13 +74,6 @@ export class DataTableComponent implements OnInit, OnDestroy {
       disableClose: true,
     })
 
-    //test
-    /*
-    if (optionalParam){
-      console.log(optionalParam);
-    }
-    else{console.log("test");}
-    */
   }
 
   public openPDF(): void {
@@ -99,4 +92,5 @@ export class DataTableComponent implements OnInit, OnDestroy {
   openDialogBoxFunctionForEdit(row:any){
     this.openDialog(row);
   }
+
 }

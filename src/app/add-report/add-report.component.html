@@ -1,7 +1,7 @@
 <div class = "wrapper">
     
     <div class = "column-wrapper">
-        <h1>Report</h1>
+        <h1 style = "text-align: center;">Report</h1>
         <div class ="title-name-date-column">
             <mat-form-field>
                 <input matInput id="employeeName" type="text" placeholder="Employee Name: " [formControl]="employeeNameControl">
@@ -20,7 +20,7 @@
             <mat-label for="report_text">Report Text: </mat-label>
             <textarea matInput cdkTextareaAutosize 
             #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="5"
+            cdkAutosizeMinRows="3"
             cdkAutosizeMaxRows="7"
             id = "report_text" [formControl]="reportTextControl" required>
             </textarea>

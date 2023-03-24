@@ -7,8 +7,8 @@
     max-height: 99%
 }
 .column-wrapper{
-    max-width: 50%;
-    max-height: 50%;
+    max-width:99%;
+    max-height: 70%;
 }
 .title-name-date-column{
     display:flex;

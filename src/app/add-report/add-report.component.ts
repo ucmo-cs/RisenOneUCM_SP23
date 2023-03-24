@@ -1,5 +1,5 @@
 import { Element } from '@angular/compiler';
-import { Component, OnInit, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject, ViewChild } from '@angular/core';
 import { elementAt } from 'rxjs';
 import { AddReportService } from './add-report.service';
 import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/report_data';
@@ -22,6 +22,9 @@ export interface AddReportData{
 })
 export class AddReportComponent implements OnInit {
 
+  @ViewChild (DataTableComponent) refresh: DataTableComponent;
+
+
   report:string;
   employeeNameControl = new FormControl('');
   dateControl = new FormControl('');
@@ -41,7 +44,7 @@ export class AddReportComponent implements OnInit {
       document.getElementById("report_text")!.innerText = this.data.project_text;
       this.reportTextControl.reset(this.data.project_text);
       this.dateControl.reset(this.data.date);
-      console.log(this.dateControl);
+      this.employeeNameControl.reset(this.data.account_id);
     }
   }
     
@@ -75,16 +78,18 @@ export class AddReportComponent implements OnInit {
 
   populateData(){
     try{
+      
       let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
       this.reportData.Item.date = dateBuffer;
       this.reportData.Item.projects = "TBD";
-      this.data.project_text = String(document.getElementById("report_text")?.innerHTML);
+      this.reportData.Item.project_text = String(document.getElementById("report_text")?.innerHTML);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
     }
     catch(exception){
-      console.log(exception)
+      //console.log(JSON.stringify(this.reportData));
+      //console.log(exception)
       return exception;
     }
   }
@@ -101,7 +106,10 @@ export class AddReportComponent implements OnInit {
       try{
         this.addreportService.saveReport(this.reportData);
         //console.log(this.reportData);
+        
         this.dialogRef.close();
+
+        location.reload();
       }
       catch(exception){
         return exception;
