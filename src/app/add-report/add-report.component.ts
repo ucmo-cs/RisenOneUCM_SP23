@@ -82,7 +82,7 @@ export class AddReportComponent implements OnInit {
       let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
       this.reportData.Item.date = dateBuffer;
       this.reportData.Item.projects = "TBD";
-      this.reportData.Item.project_text = String(document.getElementById("report_text")?.innerHTML);
+      this.reportData.Item.project_text = ((document.getElementById("report_text") as HTMLInputElement).value);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
