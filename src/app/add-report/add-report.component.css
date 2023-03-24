@@ -2,11 +2,13 @@
     border:1px solid gray;
     border-radius:30px;
     background-color: white;
-    max-width: 90%;
+    max-width: 99%;
+    min-height: 99%;
+    max-height: 99%
 }
 .column-wrapper{
-    display:flex;
-    flex-direction: row;
+    max-width: 50%;
+    max-height: 50%;
 }
 .title-name-date-column{
     display:flex;

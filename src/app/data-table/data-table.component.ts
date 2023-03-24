@@ -71,6 +71,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       height: '50%',
       width: '500px',
       data: optionalParam,
+      disableClose: true,
     })
 
     //test

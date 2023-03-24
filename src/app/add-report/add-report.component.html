@@ -1,6 +1,7 @@
 <div class = "wrapper">
-    <h1>Report</h1>
+    
     <div class = "column-wrapper">
+        <h1>Report</h1>
         <div class ="title-name-date-column">
             <mat-form-field>
                 <input matInput id="employeeName" type="text" placeholder="Employee Name: " [formControl]="employeeNameControl">
@@ -16,7 +17,6 @@
         </div>
         <div class ="report-buttons-column">
             <mat-form-field>
-            <label for="report_text">Report Text: </label>
             <input matInput type="text" [formControl]="reportTextControl" (change) = "onChangeFunc()" required>
             <mat-label for="report_text">Report Text: </mat-label>
             <textarea matInput cdkTextareaAutosize 
