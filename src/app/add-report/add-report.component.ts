@@ -27,7 +27,7 @@ export class AddReportComponent implements OnInit {
 
   report:string;
   employeeNameControl = new FormControl('');
-  dateControl = new FormControl('');
+  dateControl = new FormControl(new Date());
   reportTextControl = new FormControl('');
 
   
@@ -41,9 +41,9 @@ export class AddReportComponent implements OnInit {
     if(this.data != undefined){
       console.log(this.data);
       console.log(this.data.project_text);
-      document.getElementById("report_text")!.innerText = this.data.project_text;
+      //document.getElementById("report_text")!.innerText = this.data.project_text;
       this.reportTextControl.reset(this.data.project_text);
-      this.dateControl.reset(this.data.date);
+      //this.dateControl.reset()
       this.employeeNameControl.reset(this.data.account_id);
     }
   }
@@ -62,8 +62,14 @@ export class AddReportComponent implements OnInit {
   events: string[]=[];
 
   addEvent(type: string, event: MatDatepickerInputEvent<Date>){
-    this.events.push(type+':'+ event.value);
+    this.events.push(type+":"+ event.value);
     console.log(this.events);
+    console.log();
+  }
+  toFormattedDate(iso: string) {
+    const date = new Date(iso);
+    console.log(date);
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
   makeRandom() {
     const lengthOfCode = 40;
@@ -80,7 +86,7 @@ export class AddReportComponent implements OnInit {
     try{
       
       let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
-      this.reportData.Item.date = dateBuffer;
+      this.reportData.Item.date = String(document.getElementById("date")?.innerHTML);
       this.reportData.Item.projects = "TBD";
       this.reportData.Item.project_text = ((document.getElementById("report_text") as HTMLInputElement).value);
       this.reportData.Item.account_id = "0";

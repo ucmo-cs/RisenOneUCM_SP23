@@ -8,15 +8,23 @@
                 </mat-label>
                 <input matInput id="employeeName" type="text" [formControl]="employeeNameControl">
             </mat-form-field>
-            <mat-form-field>
+            <!--<mat-form-field>
                 <mat-label>
                     Choose a Date: 
                 </mat-label>
-                <input matInput [matDatepicker]="picker1" (dateInput)="addEvent('change', $event)" [formControl]="dateControl">
+                <input matInput #autocomplete [matDatepicker]="picker1" (dateInput)="addEvent('change', $event)" [formControl]="dateControl">
                 <mat-hint>MM/DD/YYYY</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
+            </mat-form-field>-->
+
+            <mat-form-field>
+                <input matInput [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="dateControl">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              
+              <!--<input type="hidden" [matDatepicker]="picker1" placeholder="Choose a date" (dateChange)="autocomplete.value = toFormattedDate($event.value)">-->
 
         </div>
         <div class ="report-buttons-column">
