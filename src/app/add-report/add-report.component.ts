@@ -27,7 +27,7 @@ export class AddReportComponent implements OnInit {
 
   report:string;
   employeeNameControl = new FormControl('');
-  dateControl = new FormControl(new Date());
+  dateControl = new FormControl({value: new Date(), disabled: true});
   reportTextControl = new FormControl('');
 
   
@@ -43,7 +43,8 @@ export class AddReportComponent implements OnInit {
       //console.log(this.data.project_text);
       document.getElementById("report_text")!.innerText = this.data.project_text;
       this.reportTextControl.reset(this.data.project_text);
-      (document.getElementById("date") as HTMLInputElement).value 
+      //console.log(this.data.date);
+      this.dateControl.setValue((new Date(Date.parse(this.data.date))));
       this.employeeNameControl.reset(this.data.account_id);
     }
   }
@@ -127,5 +128,6 @@ export class AddReportComponent implements OnInit {
     this.dialogRef.close();
     //console.log(((document.getElementById("date") as HTMLInputElement).value))
   }
+
 //}
 }

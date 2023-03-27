@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DataTableService } from './data-table.service';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Report_Data } from './report_data';
 import {MatDialogRef, MatDialog} from '@angular/material/dialog';
@@ -93,4 +93,16 @@ export class DataTableComponent implements OnInit, OnDestroy {
     this.openDialog(row);
   }
 
+  /*
+  @ViewChild(DataTableComponent) table: MatTable<any>
+  refreshTable(): void{
+    this.service.method().subscribe(resources => {
+      this.dataSource.data = resources; 
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+    this.table.renderRows();
+  }
+  */
+ 
 }

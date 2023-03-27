@@ -19,9 +19,10 @@
             </mat-form-field>-->
 
             <mat-form-field>
-                <input id = "date" matInput [matDatepicker]="picker1" placeholder="Angular forms" [formControl]="dateControl">
+                <input id = "date" matInput [matDatepicker]="picker1" 
+                    placeholder="Auto-Filled Date" [formControl]="dateControl">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
+                <mat-datepicker class = "test" #picker1 [disabled] = "true"></mat-datepicker>
               </mat-form-field>
               
               <!--<input type="hidden" [matDatepicker]="picker1" placeholder="Choose a date" (dateChange)="autocomplete.value = toFormattedDate($event.value)">-->
@@ -34,7 +35,7 @@
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="3"
             cdkAutosizeMaxRows="7"
-            id = "report_text" [formControl]="reportTextControl" required>
+            id = "report_text" [formControl]="reportTextControl">
             </textarea>
             </mat-form-field>
             <div class = "buttons-row">
