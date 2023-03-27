@@ -31,14 +31,14 @@ functions:
     handler: Lambda_Functions/addReport.handler
     events:
       - http:
-          path: reports
+          path: add-report
           method: post
           cors: true
   list:
     handler: Lambda_Functions/getReports.handler
     events:
       - http:
-          path: reports
+          path: list-reports
           method: get
           cors: true
 
@@ -46,6 +46,6 @@ functions:
     handler: Lambda_Functions/getOneReport.handler
     events:
       - http:
-          path: reports/{id}/{account_id}
+          path: get-one-report
           method: get
           cors: true
