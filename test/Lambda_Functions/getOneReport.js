@@ -9,8 +9,8 @@ exports.handler = async event => {
         const params = {
             TableName: tableName,
             Key: {
-                id: event.pathParameters.id,
-                account_id: event.pathParameters.account_id,
+                id: event.headers.id,
+                account_id: event.headers.account_id,
             },
         };
 
