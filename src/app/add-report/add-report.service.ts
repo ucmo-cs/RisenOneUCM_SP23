@@ -8,13 +8,27 @@ import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/rep
 })
 export class AddReportService {
 
-    private baseURL = 'https://5mom95xac0.execute-api.us-east-2.amazonaws.com/prod';
+    private basePOSTURL = 'https://5mom95xac0.execute-api.us-east-2.amazonaws.com/prod/Report';
   
+    private basePATCHURL = `https://prhyisfts3.execute-api.us-east-2.amazonaws.com/prod/Report`;
+    
     constructor(private http: HttpClient) { }
 
     saveReport(exportBody:any){
-        const URL = `${this.baseURL}`;
+        const URL = `${this.basePOSTURL}`;
         this.http.post<Report_Data>(URL, exportBody)
+        .subscribe(
+          res => {
+            console.log(res);
+          },
+          error => {
+               console.log(error);
+              }
+        );
+    }
+    updateReport(exportBody:any){
+      const URL = `${this.basePATCHURL}`;
+      this.http.put<Report_Data>(URL, exportBody)
         .subscribe(
           res => {
             console.log(res);

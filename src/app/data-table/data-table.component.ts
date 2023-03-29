@@ -117,6 +117,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
             'lastdate': this.globalLastDate,
           }
           //this.openPopup(param);
+          console.log("You have missed " + this.globalCount + " week days");
         }
       },
         (err: HttpErrorResponse) => {
@@ -185,7 +186,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
 
   openDialogBoxFunctionForEdit(row:any){
-    this.openDialog();
+    this.openDialog(row);
   }
 
   findMaxDateObject(dateArray:any){

@@ -8,7 +8,7 @@ import { API_Data } from './api-data';
 })
 export class DataTableService {
 
-   private baseURL = 'https://zx62abb126.execute-api.us-east-2.amazonaws.com/prod';
+   private baseURL = 'https://zx62abb126.execute-api.us-east-2.amazonaws.com/prod/Reports';
   
    constructor(private http: HttpClient) { }
 
