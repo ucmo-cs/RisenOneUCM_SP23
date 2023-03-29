@@ -1,7 +1,10 @@
 <div class = "wrapper">
+    <div class = "report-header">
         <h1>Report</h1>
+    </div>
     <div class = "column-wrapper">
         <div class ="title-name-date-column">
+            
             <mat-form-field>
                 <mat-label>
                     Employee Name: 
@@ -17,30 +20,30 @@
                 <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
                 <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>-->
-
-            <mat-form-field>
-                <input id = "date" matInput [matDatepicker]="picker1" 
-                    placeholder="Auto-Filled Date" [formControl]="dateControl">
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker class = "test" #picker1 [disabled] = "true"></mat-datepicker>
-              </mat-form-field>
-              
+            <div class="date-div">
+                <mat-form-field>
+                    <input id = "date" matInput [matDatepicker]="picker1" 
+                        placeholder="Auto-Filled Date" [formControl]="dateControl" (dateChange)="toFormattedDate($event.value)">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker class = "test" #picker1 [disabled] = "false"></mat-datepicker>
+                </mat-form-field>
+            </div>
               <!--<input type="hidden" [matDatepicker]="picker1" placeholder="Choose a date" (dateChange)="autocomplete.value = toFormattedDate($event.value)">-->
 
         </div>
         <div class ="report-buttons-column">
-            <mat-form-field>
+            <mat-form-field class="mat-report-text">
             <mat-label for="report_text">Report Text: </mat-label>
             <textarea matInput cdkTextareaAutosize 
             #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="3"
+            cdkAutosizeMinRows="6"
             cdkAutosizeMaxRows="7"
             id = "report_text" [formControl]="reportTextControl">
             </textarea>
             </mat-form-field>
             <div class = "buttons-row">
-                <button (click)="onNoClick()">Cancel</button>
-                <button (click)="onSave()">Save</button>
+                <button class="cancelButton" mat-raised-button color = "primary" (click)="onNoClick()">Cancel</button>
+                <button class="saveButton" mat-raised-button color="primary"(click)="onSave()">Save</button>
             </div>
         </div>
     </div>

@@ -45,6 +45,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
               this.dataArray.Items[i].report_status = "<b>Missing</b>";
             }
         }
+
+        console.log(res);
         this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
       
         this.dataSource.paginator = this.paginator;
@@ -138,6 +140,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
     date.setDate(date.getDate() - 1);
     return date;
   }
+  ngAfterViewInit(){
+    console.log('test')
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -161,10 +166,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   }
 
-  openDialog(optionalParam?: object): void{
+  openDialog(optionalParam?: object, optionalParam2?: any): void{
     const dialogRef = this.matDialog.open(AddReportComponent, {
       height: '50%',
-      width: '500px',
+      width: '750px',
       data: optionalParam,
       disableClose: true,
     })
