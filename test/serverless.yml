@@ -49,3 +49,11 @@ functions:
           path: get-one-report
           method: get
           cors: true
+
+  listForAccount:
+    handler: Lambda_Functions/getReportsForAccount.handler
+    events:
+      - http:
+          path: list-reports-for-account
+          method: get
+          cors: true

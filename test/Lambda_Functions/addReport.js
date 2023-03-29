@@ -12,7 +12,14 @@ exports.handler = async (event) => {
     try{
         const eventBuffer = {
             "TableName": "Report",
-            "Item": JSON.parse(event.body)
+            "Item": {
+                "id": event.headers.id,
+                "account_id": event.headers.account_id,
+                "date": event.body.date,
+                "report_status": event.body.report_status,
+                "projects": event.body.projects,
+                "project_text": event.body.project_text,
+            },
         };
         
         await ddb.put(eventBuffer).promise();
