@@ -47,6 +47,10 @@ export class AddReportComponent implements OnInit {
       this.dateControl.setValue((new Date(Date.parse(this.data.date))));
       this.employeeNameControl.reset(this.data.account_id);
     }
+
+    //if data.date is not null
+
+    
   }
     
   reportData = {
