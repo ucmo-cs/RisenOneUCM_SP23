@@ -52,6 +52,7 @@ export class AddReportComponent implements OnInit {
     //if data.date is not null
 
   }
+  
     
   reportData = {
     "Item": {
@@ -71,9 +72,16 @@ export class AddReportComponent implements OnInit {
     console.log(this.events);
     console.log();
   }
+  addDays(date:string,days:number){
+    var result= new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
   toFormattedDate(iso: string) {
     const date = new Date(iso);
-    console.log(date);
+    console.log(date.getDate()+1);
+    console.log(new Date(Date.parse('3/32/2022')));
+
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
   makeRandom() {
