@@ -88,6 +88,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
               last_Date = this.addDays(last_Date);
 
+              /*
+              Checks if day is not sunday or saturday then adds report data accordingly
+              */
               if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
                 let reportData = {
                   "Item": {
