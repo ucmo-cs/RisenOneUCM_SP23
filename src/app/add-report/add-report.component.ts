@@ -37,14 +37,13 @@ export class AddReportComponent implements OnInit {
       id: string, project_text: string, projects: string, report_status: string},
       private addreportService: AddReportService,public dialog: MatDialog) {}
   
+  /*
+  this only serves to pull up data on click
+  */
   ngOnInit(): void {
     //this handles pulling up data
     if(this.data != undefined){
-      //console.log(this.data);
-      //console.log(this.data.project_text);
-      document.getElementById("report_text")!.innerText = this.data.project_text;
       this.reportTextControl.reset(this.data.project_text);
-      //console.log(this.data.date);
       this.dateControl.setValue((new Date(this.data.date)));
       this.employeeNameControl.reset(this.data.account_id);
     }
@@ -97,41 +96,40 @@ export class AddReportComponent implements OnInit {
 
   populateSaveData(){
     try{
-      
-      //let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
-      this.reportData.Item.date = (document.getElementById("date") as HTMLInputElement).value;//dateBuffer;
+      this.reportData.Item.date = this.parseDateIntoString(this.dateControl.value!);
       this.reportData.Item.projects = "TBD";
-      this.reportData.Item.project_text = ((document.getElementById("report_text") as HTMLInputElement).value);
+      this.reportData.Item.project_text = this.reportTextControl.value!;//((document.getElementById("report_text") as HTMLInputElement).value);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
+      console.log((document.getElementById("report_text") as HTMLInputElement).value);
     }
     catch(exception){
-      //console.log(JSON.stringify(this.reportData));
-      //console.log(exception)
       return exception;
     }
   }
 
   populateUpdateData(){
     try{
-      
-      //let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
       this.reportData.Item.date = this.data.date;//dateBuffer;
       this.reportData.Item.projects = this.data.projects;
-      this.reportData.Item.project_text = ((document.getElementById("report_text") as HTMLInputElement).value);
+      this.reportData.Item.project_text = this.reportTextControl.value!;
       this.reportData.Item.account_id = this.data.account_id;
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.data.id;
     }
     catch(exception){
-      //console.log(JSON.stringify(this.reportData));
-      //console.log(exception)
       return exception;
     }
   }
 
-  //this functions handles either post or patch
+  parseDateIntoString(date:Date){
+    return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
+  }
+
+  /*
+  this functions handles either post or patch
+  */
   onSave(){
     //handles post
     if(this.data == undefined){
@@ -144,7 +142,6 @@ export class AddReportComponent implements OnInit {
 
       try{
         this.addreportService.saveReport(this.reportData);
-        //console.log(this.reportData);
         
         this.dialogRef.close();
 
@@ -158,9 +155,12 @@ export class AddReportComponent implements OnInit {
       }
 
     }
-    //handles patch
+
+    /*
+    handles patch
+    */
+
     else{
-      //console.log("in patch func");
       try {
         this.populateUpdateData();
       } catch (error) {
@@ -169,7 +169,6 @@ export class AddReportComponent implements OnInit {
 
       try{
         this.addreportService.updateReport(this.reportData);
-        //console.log(this.reportData);
         
         this.dialogRef.close();
 
@@ -185,7 +184,6 @@ export class AddReportComponent implements OnInit {
   }
   onNoClick(): void {
     this.dialogRef.close();
-    //console.log(((document.getElementById("date") as HTMLInputElement).value))
   }
 
   delay(ms: number) {

@@ -46,12 +46,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
             }
         }
 
-        console.log(res);
         this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
       
         this.dataSource.paginator = this.paginator;
-        //console.log(this.dataSource.data);
-        //console.log(this.dataSource)
         //this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
@@ -142,7 +139,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
     return date;
   }
   ngAfterViewInit(){
-    console.log('test')
+    //console.log('test')
   }
 
   applyFilter(event: Event) {
