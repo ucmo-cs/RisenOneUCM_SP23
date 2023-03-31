@@ -178,7 +178,7 @@ export class AddReportComponent implements OnInit {
           // Do something after
           this.dialogRef.close();
           location.reload();
-        })();
+        })(); 
       }
       catch(exception){
         return exception;
