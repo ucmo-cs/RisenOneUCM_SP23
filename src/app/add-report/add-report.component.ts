@@ -47,7 +47,7 @@ export class AddReportComponent implements OnInit {
   }
   
     
-  reportData = {
+  reportData : Report_Data = {
     "Item": {
       "date": "",
       "id": "",
@@ -139,14 +139,17 @@ export class AddReportComponent implements OnInit {
       }
 
       try{
-        this.addreportService.saveReport(this.reportData);
+        (async () => { 
+          // Do something before delay
+          this.addreportService.saveReport(this.reportData).subscribe();
+  
+          await this.delay(3000);
+  
+          // Do something after
+          this.dialogRef.close();
+          location.reload();
+        })();
         
-        this.dialogRef.close();
-
-        //sometimes service is slower than reload, so this helps with that issue
-        this.delay(5000);
-        
-        //location.reload();
       }
       catch(exception){
         return exception;
@@ -166,14 +169,16 @@ export class AddReportComponent implements OnInit {
       }
 
       try{
-        this.addreportService.updateReport(this.reportData);
-        
-        this.dialogRef.close();
-
-        //sometimes service is slower than reload, so this helps with that issue
-        this.delay(50000);
-
-        location.reload();
+        (async () => { 
+          // Do something before delay
+          this.addreportService.updateReport(this.reportData).subscribe();
+  
+          await this.delay(3000);
+  
+          // Do something after
+          this.dialogRef.close();
+          location.reload();
+        })();
       }
       catch(exception){
         return exception;
