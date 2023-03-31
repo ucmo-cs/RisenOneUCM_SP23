@@ -126,6 +126,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
             'count': this.globalCount,
             'lastdate': this.globalLastDate,
           }
+
+          /*
+          Pop-up for missing days below. Should notify users when the last update
+          was, and how many days the user has missed. Will require a refresh after
+          the user confirms.
+          */
+
           //this.openPopup(param);
           console.log("You have missed " + this.globalCount + " week days");
         }
@@ -136,6 +143,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
       
   }
 
+  /*
+  Misc functions
+  */
   parseDateIntoString(date:Date){
     return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
   }
@@ -211,17 +221,4 @@ export class DataTableComponent implements OnInit, OnDestroy {
     }
     return new Date(max);
   }
-
-  /*
-  @ViewChild(DataTableComponent) table: MatTable<any>
-  refreshTable(): void{
-    this.service.method().subscribe(resources => {
-      this.dataSource.data = resources; 
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    });
-    this.table.renderRows();
-  }
-  */
- 
 }
