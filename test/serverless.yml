@@ -58,10 +58,11 @@ functions:
           method: get
           cors: true
 
-  # update:
-  #   handler: Lambda_Functions/updateReport.handler
-  #   events:
-  #     - http:
-  #         path: update-report
-  #         method: put
-  #         cors true
+  update:
+    handler: Lambda_Functions/editReport.handler
+    events:
+      - http:
+          path: update-report
+          method: put
+          cors: true
+  
