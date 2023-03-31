@@ -94,11 +94,15 @@ export class AddReportComponent implements OnInit {
   }
   
 
+  /*
+  Essentially populateSaveData and populateUpdateData uses the predefined object 'reportData'
+  to load the object into a defined object before saving/updating. Ensures uniformity.
+  */
   populateSaveData(){
     try{
       this.reportData.Item.date = this.parseDateIntoString(this.dateControl.value!);
       this.reportData.Item.projects = "TBD";
-      this.reportData.Item.project_text = this.reportTextControl.value!;//((document.getElementById("report_text") as HTMLInputElement).value);
+      this.reportData.Item.project_text = this.reportTextControl.value!;
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
@@ -123,12 +127,12 @@ export class AddReportComponent implements OnInit {
     }
   }
 
-  parseDateIntoString(date:Date){
-    return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
-  }
+
 
   /*
-  this functions handles either post or patch
+  This functions handles either post or patch. A lot of try-catch
+  statements in order to try and prevent any errors that would be
+  application-breaking.
   */
   onSave(){
     //handles post
@@ -182,6 +186,14 @@ export class AddReportComponent implements OnInit {
       }
     }
   }
+
+  /*
+  Misc Functions
+  */
+  parseDateIntoString(date:Date){
+    return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -189,5 +201,5 @@ export class AddReportComponent implements OnInit {
   delay(ms: number) {
     return new Promise( resolve => setTimeout(resolve, ms) );
   }
-//}
+
 }
