@@ -37,6 +37,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
   constructor(private reportService: DataTableService, private matDialog: MatDialog) { }
 
   ngOnInit() {
+    /*
+    Initialization of data table
+    */
     this.subs.add(this.reportService.getAllReports()
       .subscribe((res) => {
         this.dataArray =  JSON.parse(res.body);
@@ -49,11 +52,16 @@ export class DataTableComponent implements OnInit, OnDestroy {
         this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
       
         this.dataSource.paginator = this.paginator;
-        //this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
 
        
-
+        /*
+        All the following code until 'parseDateIntoString' pertains to how the app
+        handles missing days. Essentially, the front-end will run the addReportService
+        equal to the amount of days missed. On weekends, however, it does not count 
+        those as missing days. The user will then be able to edit the missing days'
+        data
+        */
         let fake_Current_Date = this.subDays(new Date);
         let current_date = new Date();
         let last_Date = this.findMaxDateObject(this.dataArray.Items);
@@ -102,12 +110,12 @@ export class DataTableComponent implements OnInit, OnDestroy {
                     "project_text": "Auto-generated"
                   }
                 };
+                /*
+                Below will include a call to reportService in order to add data equalivent
+                to count
+                */
                 count++;
               }
-              //this.openDialog();
-              //console.log("TESTTTTTT");
-              //console.log(last_Date);
-              
             }
             this.globalCount = count;
           }
