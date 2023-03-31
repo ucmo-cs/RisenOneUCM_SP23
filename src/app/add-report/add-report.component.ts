@@ -9,12 +9,6 @@ import { FormControl } from '@angular/forms';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 
-export interface AddReportData{
-  name:string,
-  date:string,
-  report:string,
-}
-
 @Component({
   selector: 'app-add-report',
   templateUrl: './add-report.component.html',
@@ -150,9 +144,9 @@ export class AddReportComponent implements OnInit {
         this.dialogRef.close();
 
         //sometimes service is slower than reload, so this helps with that issue
-        this.delay(2500);
+        this.delay(5000);
         
-        location.reload();
+        //location.reload();
       }
       catch(exception){
         return exception;
@@ -177,7 +171,7 @@ export class AddReportComponent implements OnInit {
         this.dialogRef.close();
 
         //sometimes service is slower than reload, so this helps with that issue
-        this.delay(2500);
+        this.delay(50000);
 
         location.reload();
       }
