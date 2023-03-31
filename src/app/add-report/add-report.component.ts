@@ -37,17 +37,21 @@ export class AddReportComponent implements OnInit {
       id: string, project_text: string, projects: string, report_status: string},
       private addreportService: AddReportService,public dialog: MatDialog) {}
   
+  /*
+  this only serves to pull up data on click
+  */
   ngOnInit(): void {
+    //this handles pulling up data
     if(this.data != undefined){
-      //console.log(this.data);
-      //console.log(this.data.project_text);
-      document.getElementById("report_text")!.innerText = this.data.project_text;
       this.reportTextControl.reset(this.data.project_text);
-      //console.log(this.data.date);
-      this.dateControl.setValue((new Date(Date.parse(this.data.date))));
+      this.dateControl.setValue((new Date(this.data.date)));
       this.employeeNameControl.reset(this.data.account_id);
     }
+
+    //if data.date is not null
+
   }
+  
     
   reportData = {
     "Item": {
@@ -67,9 +71,16 @@ export class AddReportComponent implements OnInit {
     console.log(this.events);
     console.log();
   }
+  addDays(date:string,days:number){
+    var result= new Date(date);
+    result.setDate(result.getDate() + days);
+    return result;
+  }
   toFormattedDate(iso: string) {
     const date = new Date(iso);
-    console.log(date);
+    console.log(date.getDate()+1);
+    console.log(new Date(Date.parse('3/32/2022')));
+
     return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   }
   makeRandom() {
@@ -83,28 +94,47 @@ export class AddReportComponent implements OnInit {
   }
   
 
-  populateData(){
+  populateSaveData(){
     try{
-      
-      //let dateBuffer = String(new Date().toLocaleString().split(",")[0]);
-      this.reportData.Item.date = (document.getElementById("date") as HTMLInputElement).value;//dateBuffer;
+      this.reportData.Item.date = this.parseDateIntoString(this.dateControl.value!);
       this.reportData.Item.projects = "TBD";
-      this.reportData.Item.project_text = ((document.getElementById("report_text") as HTMLInputElement).value);
+      this.reportData.Item.project_text = this.reportTextControl.value!;//((document.getElementById("report_text") as HTMLInputElement).value);
       this.reportData.Item.account_id = "0";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
+      console.log((document.getElementById("report_text") as HTMLInputElement).value);
     }
     catch(exception){
-      //console.log(JSON.stringify(this.reportData));
-      //console.log(exception)
       return exception;
     }
   }
 
+  populateUpdateData(){
+    try{
+      this.reportData.Item.date = this.data.date;//dateBuffer;
+      this.reportData.Item.projects = this.data.projects;
+      this.reportData.Item.project_text = this.reportTextControl.value!;
+      this.reportData.Item.account_id = this.data.account_id;
+      this.reportData.Item.report_status = "Submitted";
+      this.reportData.Item.id =  this.data.id;
+    }
+    catch(exception){
+      return exception;
+    }
+  }
+
+  parseDateIntoString(date:Date){
+    return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
+  }
+
+  /*
+  this functions handles either post or patch
+  */
   onSave(){
+    //handles post
     if(this.data == undefined){
       try{
-        this.populateData();
+        this.populateSaveData();
       }
       catch(exception){
         return exception;
@@ -112,10 +142,12 @@ export class AddReportComponent implements OnInit {
 
       try{
         this.addreportService.saveReport(this.reportData);
-        //console.log(this.reportData);
         
         this.dialogRef.close();
 
+        //sometimes service is slower than reload, so this helps with that issue
+        this.delay(2500);
+        
         location.reload();
       }
       catch(exception){
@@ -123,11 +155,39 @@ export class AddReportComponent implements OnInit {
       }
 
     }
+
+    /*
+    handles patch
+    */
+
+    else{
+      try {
+        this.populateUpdateData();
+      } catch (error) {
+        return error;
+      }
+
+      try{
+        this.addreportService.updateReport(this.reportData);
+        
+        this.dialogRef.close();
+
+        //sometimes service is slower than reload, so this helps with that issue
+        this.delay(2500);
+
+        location.reload();
+      }
+      catch(exception){
+        return exception;
+      }
+    }
   }
   onNoClick(): void {
     this.dialogRef.close();
-    //console.log(((document.getElementById("date") as HTMLInputElement).value))
   }
 
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
 //}
 }

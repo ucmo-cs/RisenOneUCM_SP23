@@ -1,27 +1,61 @@
 .wrapper{
-    border:1px solid gray;
-    border-radius:30px;
     background-color: white;
-    max-width: 99%;
-    min-height: 99%;
-    max-height: 99%
+}
+.report-header{
+    display:flex;
+    flex-direction: row;
+    align-self:center;
+    padding-top: 20px;
+    padding-left:20px;
 }
 .column-wrapper{
-    max-width: 50%;
-    max-height: 50%;
+    max-width: 100%;
+    max-height: 100%;
     display:flex;
     flex-direction:row;
+    justify-content: center;
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:10px;
 }
 .title-name-date-column{
     display:flex;
     flex-direction:column;
-    padding-top:50px;
+    padding-top:25px;
+    padding-left:5px;
+}
+.report-buttons-column{
+    padding-top:25px;
+    padding-right:5px;
+    padding-left:5px;
+    width:100%;
+    height:200px;
+}
+.mat-report-text{
+    width: 100%;
+    height:100%;
+}
+.date-div{
+    padding-top:60px;
 }
 .buttons-row{
     display:flex;
     flex-direction: row;
     align-items: end;
     justify-content: end;
+}
+button{
+    border-radius: 20px !important;
+    border-style: solid !important;
+  }
+.cancelButton{
+    color:rgba(255,195,76,1) !important;
+    --mdc-protected-button-container-color: white !important;
+    border-radius: 1px;
+    border-color: rgba(255,195,76,1)!important;
+  }
+.saveButton{
+    border-color: rgba(255,195,76,1)!important;
 }
 
 #date{
