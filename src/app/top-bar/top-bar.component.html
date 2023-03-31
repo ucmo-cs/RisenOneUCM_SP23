@@ -11,13 +11,32 @@
       <h1>Risen One Employee Portal</h1>
     </div>
     <div class ="top-bar-buttons">
-      <button mat-icon-button color="white" aria-label="Example icon-button with a menu icon">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu icon">
         <mat-icon>menu</mat-icon>
       </button>
-
-      <button mat-icon-button color="white" aria-label="Account Circle button">
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Account Circle button">
         <mat-icon>account_circle</mat-icon>
       </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+      </mat-menu>
     </div>
 </mat-toolbar>
 

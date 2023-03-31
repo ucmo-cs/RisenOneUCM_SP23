@@ -21,6 +21,7 @@ import { MatDialogModule,MatDialogRef, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DIALOG_DA
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
 //This is a push test
 //console.log ("test");
 @NgModule({
@@ -48,6 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
+    MatMenuModule
   ],
   providers: [HttpErrorHandler,
               MessageService,
