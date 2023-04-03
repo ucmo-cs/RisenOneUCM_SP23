@@ -197,23 +197,12 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
 
   public openPDF(): void {
-    console.log(this.dataArray);
     const dialogRef = this.matDialog.open(PDF_FormatComponent, {
-      height: '50%',
-      width: '750px',
-      data: this.dataArray,
+      height: '100%',
+      width: '100%',
     })
     
-    /*let DATA: any = document.getElementById('dataTable');
-    html2canvas(DATA).then((canvas) => {
-      let fileWidth = 208;
-      let fileHeight = (canvas.height * fileWidth) / canvas.width;
-      const FILEURI = canvas.toDataURL('image/png');
-      let PDF = new jsPDF('p', 'mm', 'a4');
-      let position = 0;
-      PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      PDF.save('angular-demo.pdf');
-    });*/
+    /**/
   }
 
   openDialogBoxFunctionForEdit(row:any){

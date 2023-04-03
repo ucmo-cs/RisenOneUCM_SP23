@@ -6,7 +6,8 @@
       <h1 class="status-class">Employee Status Update</h1>
     
     <div class="mat-elevation-z1;">
-      <table id = "dataTable" mat-table [dataSource]="dataSource" matSort>
+      <table id = "dataTable" mat-table [dataSource]="dataSource" matSort
+      matSortActive="date" matSortDirection="desc">
 
     <ng-container matColumnDef="date">
       <th mat-header-cell *matHeaderCellDef  mat-sort-header class="table-header">Date</th>
