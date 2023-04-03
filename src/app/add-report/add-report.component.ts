@@ -18,6 +18,10 @@ export class AddReportComponent implements OnInit {
 
   @ViewChild (DataTableComponent) refresh: DataTableComponent;
 
+  /*
+  For .html disable toggle
+  */
+  toggleLayer = false;
 
   report:string;
   employeeNameControl = new FormControl('');
@@ -141,6 +145,11 @@ export class AddReportComponent implements OnInit {
       try{
         (async () => { 
           // Do something before delay
+
+          /*
+          Disables page and then saves report
+          */
+          this.toggleLayer = true;
           this.addreportService.saveReport(this.reportData).subscribe();
   
           await this.delay(3000);
@@ -171,6 +180,11 @@ export class AddReportComponent implements OnInit {
       try{
         (async () => { 
           // Do something before delay
+
+          /*
+          Disables page and then updates report
+          */
+          this.toggleLayer = true;
           this.addreportService.updateReport(this.reportData).subscribe();
   
           await this.delay(3000);

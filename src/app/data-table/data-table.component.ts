@@ -11,6 +11,7 @@ import {AddReportComponent} from '../add-report/add-report.component';
 import {MatIconModule} from '@angular/material/icon';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { PDF_FormatComponent } from '../pdf-format/pdf-format.component';
 
 @Component({
   selector: 'app-data-table',
@@ -196,7 +197,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
 
   public openPDF(): void {
-    let DATA: any = document.getElementById('dataTable');
+    console.log(this.dataArray);
+    const dialogRef = this.matDialog.open(PDF_FormatComponent, {
+      height: '50%',
+      width: '750px',
+      data: this.dataArray,
+    })
+    
+    /*let DATA: any = document.getElementById('dataTable');
     html2canvas(DATA).then((canvas) => {
       let fileWidth = 208;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
@@ -205,7 +213,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('angular-demo.pdf');
-    });
+    });*/
   }
 
   openDialogBoxFunctionForEdit(row:any){

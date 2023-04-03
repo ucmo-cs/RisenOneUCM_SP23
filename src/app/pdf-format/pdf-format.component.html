@@ -1,0 +1,31 @@
+<table id = "dataTable" mat-table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element" class="left-text">{{element.date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="projects">
+      <th mat-header-cell *matHeaderCellDef> Projects </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> 
+        {{element.projects}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="report_text">
+        <th mat-header-cell *matHeaderCellDef> Report Text </th>
+        <td mat-cell *matCellDef="let element" class="left-text"> 
+          {{element.report_text}}
+        </td>
+      </ng-container>
+
+    <ng-container matColumnDef="report_status">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element" class="left-text"> 
+        {{element.report_status}}
+      </td>
+    </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="table-header"></tr>
+        <tr class = "dataRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>

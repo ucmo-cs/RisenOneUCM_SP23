@@ -22,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
+import { PDF_FormatComponent } from './pdf-format/pdf-format.component';
 //This is a push test
 //console.log ("test");
 @NgModule({
@@ -29,7 +30,8 @@ import { MatMenuModule } from '@angular/material/menu';
     AppComponent,
     TopBarComponent,
     DataTableComponent,
-    AddReportComponent
+    AddReportComponent,
+    PDF_FormatComponent,
   ],
   imports: [
     BrowserModule,
