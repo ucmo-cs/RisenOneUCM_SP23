@@ -56,9 +56,10 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     MatMenuModule,
     RouterModule.forRoot([
+      {path: 'top-bar-component', component: TopBarComponent},
       {path: 'login-component', component: LoginComponent},
       {path: 'data-table-component', component: DataTableComponent},
-      {path: 'top-bar-component', component: TopBarComponent}
+      {path: '', redirectTo: '/login-component', pathMatch: 'full'},
     ]),
   ],
   providers: [HttpErrorHandler,

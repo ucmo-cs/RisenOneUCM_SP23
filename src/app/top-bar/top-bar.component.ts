@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-bar.component.css']
 })
 export class TopBarComponent {
+
+  testFunction(){
+    console.log('test success');
+  }
 
 }
