@@ -97,11 +97,16 @@ export class AddReportComponent implements OnInit {
   to load the object into a defined object before saving/updating. Ensures uniformity.
   */
   populateSaveData(){
+    /*
+    Account ID will ideally take data from user login information. For now
+    it is just a hard coded value. Projects will also take from 'projects'
+    field from accounts. For now it is a hardcoded value.
+    */
     try{
       this.reportData.Item.date = this.parseDateIntoString(this.dateControl.value!);
       this.reportData.Item.projects = "TBD";
       this.reportData.Item.project_text = this.reportTextControl.value!;
-      this.reportData.Item.account_id = "0";
+      this.reportData.Item.account_id = "Bob Test";
       this.reportData.Item.report_status = "Submitted";
       this.reportData.Item.id =  this.makeRandom();
       console.log((document.getElementById("report_text") as HTMLInputElement).value);

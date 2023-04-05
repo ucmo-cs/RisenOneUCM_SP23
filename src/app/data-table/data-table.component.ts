@@ -65,7 +65,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
         */
         let fake_Current_Date = this.subDays(new Date);
         let current_date = new Date();
-        let last_Date = this.findMaxDateObject(this.dataArray.Items);
+        let last_Date;
+
+        try {
+          last_Date = this.findMaxDateObject(this.dataArray.Items);
+        } catch (error) {
+          
+        }
+        
 
         //spaghetti code 
         if (last_Date != undefined){
@@ -93,32 +100,37 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
             //while 'last date' does not equal current date, keeps adding until it catches up
             //to current date - 1 day
-            while(last_Date.getDate() != fake_Current_Date.getDate()){
+            try {
+              while(last_Date.getDate() != fake_Current_Date.getDate()){
 
-              last_Date = this.addDays(last_Date);
-
-              /*
-              Checks if day is not sunday or saturday then adds report data accordingly
-              */
-              if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
-                let reportData = {
-                  "Item": {
-                    "date": this.parseDateIntoString(last_Date),
-                    "id": "",
-                    "account_id": '0',
-                    "report_status": "Missing",
-                    "projects": "",
-                    "project_text": "Auto-generated"
-                  }
-                };
+                last_Date = this.addDays(last_Date);
+  
                 /*
-                Below will include a call to reportService in order to add data equalivent
-                to count
+                Checks if day is not sunday or saturday then adds report data accordingly
                 */
-                count++;
+                if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
+                  let reportData = {
+                    "Item": {
+                      "date": this.parseDateIntoString(last_Date),
+                      "id": "",
+                      "account_id": '0',
+                      "report_status": "Missing",
+                      "projects": "",
+                      "project_text": "Auto-generated"
+                    }
+                  };
+                  /*
+                  Below will include a call to reportService in order to add data equalivent
+                  to count
+                  */
+                  count++;
+                }
               }
+              this.globalCount = count;
+            } catch (error) {
+              
             }
-            this.globalCount = count;
+
           }
         }
 
@@ -198,8 +210,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   public openPDF(): void {
     const dialogRef = this.matDialog.open(PDF_FormatComponent, {
-      height: '100%',
-      width: '100%',
+      height: '50%',
+      width: '50%',
     })
     
     /**/

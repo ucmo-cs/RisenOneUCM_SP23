@@ -62,14 +62,14 @@ import { async } from '@angular/core/testing';
             PDF.save('angular-demo.pdf');
             });*/
 
-            html2canvas(document.getElementById('dataTable2')!, {scale: 2}).then(function(canvas){
-                var wid: number
-                var hgt: number
-                var img = canvas.toDataURL("image/png", wid = canvas.width); //hgt = canvas.height);
-                var hratio = canvas.height/wid;
+            html2canvas(document.getElementById('dataTable2')!, {scale: 3}).then(function(canvas){
+                var wid = canvas.width;
+                var hgt = canvas.height;
+                var img = canvas.toDataURL("image/png", 1.0);
+                var hratio = hgt / wid;
                 var doc = new jsPDF('p','pt','a4');
                 var width = doc.internal.pageSize.width;    
-                var height = width * hratio
+                var height = doc.internal.pageSize.height;//width * hratio
                 doc.addImage(img,'JPEG',0,0, width, height);
                 doc.save('Test.pdf');
             });
