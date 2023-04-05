@@ -24,6 +24,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { PDF_FormatComponent } from './pdf-format/pdf-format.component';
 import { LoginComponent } from './login/login.component';
+import { RouterModule } from '@angular/router';
 //This is a push test
 //console.log ("test");
 @NgModule({
@@ -53,7 +54,12 @@ import { LoginComponent } from './login/login.component';
     MatDatepickerModule,
     MatNativeDateModule,
     FormsModule,
-    MatMenuModule
+    MatMenuModule,
+    RouterModule.forRoot([
+      {path: 'login-component', component: LoginComponent},
+      {path: 'data-table-component', component: DataTableComponent},
+      {path: 'top-bar-component', component: TopBarComponent}
+    ]),
   ],
   providers: [HttpErrorHandler,
               MessageService,
