@@ -23,6 +23,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { PDF_FormatComponent } from './pdf-format/pdf-format.component';
+import { LoginComponent } from './login/login.component';
 //This is a push test
 //console.log ("test");
 @NgModule({
@@ -32,6 +33,7 @@ import { PDF_FormatComponent } from './pdf-format/pdf-format.component';
     DataTableComponent,
     AddReportComponent,
     PDF_FormatComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
