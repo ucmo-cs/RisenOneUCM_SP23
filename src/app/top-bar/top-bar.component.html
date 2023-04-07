@@ -15,30 +15,28 @@
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+          <button mat-menu-item>
           <mat-icon>settings</mat-icon>
-          <span>Help</span>
+          <span>testing</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/login-component" routerLinkActive="active-link">
           <mat-icon>exit_to_app</mat-icon>
           <span>Log Out</span>
         </button>
       </mat-menu>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Account Circle button">
+      <button mat-icon-button [matMenuTriggerFor]="menu2" aria-label="Example icon-button with a menu icon">
         <mat-icon>account_circle</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item routerLink="/login-component">
+      <mat-menu #menu2="matMenu">
+          <button mat-menu-item (click)="testFunction()">
           <mat-icon>settings</mat-icon>
-          <span>Help</span>
+          <span>menu 2 item 1</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/login-component" routerLinkActive="active-link">
           <mat-icon>exit_to_app</mat-icon>
-          <span>Log Out</span>
+          <span>menu 2 logout</span>
         </button>
       </mat-menu>
     </div>
 </mat-toolbar>
-
-
 <router-outlet></router-outlet>

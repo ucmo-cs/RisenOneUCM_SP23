@@ -5,9 +5,9 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 
 const routes: Routes = [
+  { path: 'top-bar-component', component: TopBarComponent},
   { path: 'login-component', component: LoginComponent},
   { path: 'data-table-component', component: DataTableComponent },
-  { path: 'top-bar-component', component: TopBarComponent}
 ];
 
 @NgModule({

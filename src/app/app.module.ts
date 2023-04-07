@@ -61,10 +61,10 @@ import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
     FormsModule,
     MatMenuModule,
     RouterModule.forRoot([
+      {path: 'top-bar-component', component: TopBarComponent},
       {path: 'login-component', component: LoginComponent},
       {path: 'data-table-component', component: DataTableComponent},
-      {path: 'top-bar-component', component: TopBarComponent},
-      {path: '**', component: LoginComponent},
+      {path: '', redirectTo: '/login-component', pathMatch: 'full'},
     ]),
   ],
   providers: [HttpErrorHandler,
