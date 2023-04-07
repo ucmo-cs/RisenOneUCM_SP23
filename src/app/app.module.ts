@@ -25,6 +25,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PDF_FormatComponent } from './pdf-format/pdf-format.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from '@abacritt/angularx-social-login';
+import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 //This is a push test
 //console.log ("test");
 @NgModule({
@@ -58,7 +63,8 @@ import { RouterModule } from '@angular/router';
     RouterModule.forRoot([
       {path: 'login-component', component: LoginComponent},
       {path: 'data-table-component', component: DataTableComponent},
-      {path: 'top-bar-component', component: TopBarComponent}
+      {path: 'top-bar-component', component: TopBarComponent},
+      {path: '**', component: LoginComponent},
     ]),
   ],
   providers: [HttpErrorHandler,
@@ -69,7 +75,19 @@ import { RouterModule } from '@angular/router';
               },
               { provide: MAT_DIALOG_DATA, useValue: {} },
     // { provide: MdDialogRef, useValue: {} }, --> deprecated
-            ],
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true, //keeps the user signed in
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('126800080647-g9ndsbi0eb8dald70e5ph7g40avbrqoh.apps.googleusercontent.com') // your client id
+          }
+        ]
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
