@@ -12,6 +12,7 @@ import {MatIconModule} from '@angular/material/icon';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { PDF_FormatComponent } from '../pdf-format/pdf-format.component';
+import { AddReportService } from '../add-report/add-report.service';
 
 @Component({
   selector: 'app-data-table',
@@ -35,7 +36,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   private globalLastDate: Date;
 
-  constructor(private reportService: DataTableService, private matDialog: MatDialog) { }
+  toggleLayer = false;
+
+  constructor(private reportService: DataTableService,
+    private addreportService: AddReportService, private matDialog: MatDialog) { }
 
   ngOnInit() {
     /*
@@ -78,6 +82,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         if (last_Date != undefined){
           this.globalLastDate = new Date(this.parseDateIntoString(last_Date));
 
+          console.log(this.globalLastDate);
           let var1 = last_Date.getDate();
           let var2 = last_Date.getFullYear();
           let var3 = last_Date.getMonth();
@@ -112,10 +117,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   let reportData = {
                     "Item": {
                       "date": this.parseDateIntoString(last_Date),
-                      "id": "",
-                      "account_id": '0',
+                      "id": this.makeRandom(),
+                      "account_id": 'Bob Test',
                       "report_status": "Missing",
-                      "projects": "",
+                      "projects": "TBD",
                       "project_text": "Auto-generated"
                     }
                   };
@@ -123,6 +128,23 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   Below will include a call to reportService in order to add data equalivent
                   to count
                   */
+                  (async () => { 
+                    //console.log(reportData);
+                    // Do something before delay
+          
+                    /*
+                    Disables page and then updates report
+                    */
+                    this.toggleLayer = true;
+
+                    //this.addreportService.saveReport(reportData).subscribe();
+            
+                    //await this.delay(3500);
+
+                    location.reload();
+              
+                  })(); 
+
                   count++;
                 }
               }
@@ -131,6 +153,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
               
             }
 
+            /*
+            Pop up prompt here and then on confirmation it reloads page
+            */
           }
         }
 
@@ -159,6 +184,11 @@ export class DataTableComponent implements OnInit, OnDestroy {
   /*
   Misc functions
   */
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
   parseDateIntoString(date:Date){
     return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
   }
@@ -229,5 +259,15 @@ export class DataTableComponent implements OnInit, OnDestroy {
       }
     }
     return new Date(max);
+  }
+
+  makeRandom() {
+    const lengthOfCode = 40;
+    let possible = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    let text = "";
+    for (let i = 0; i < lengthOfCode; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+      return text;
   }
 }
