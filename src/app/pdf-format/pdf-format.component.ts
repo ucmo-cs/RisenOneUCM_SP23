@@ -62,7 +62,7 @@ import { async } from '@angular/core/testing';
             PDF.save('angular-demo.pdf');
             });*/
 
-            html2canvas(document.getElementById('dataTable2')!, {scale: 3}).then(function(canvas){
+            html2canvas(document.getElementById('dataTable2')!, {scale: 2}).then(function(canvas){
                 var wid = canvas.width;
                 var hgt = canvas.height;
                 var img = canvas.toDataURL("image/png", 1.0);
