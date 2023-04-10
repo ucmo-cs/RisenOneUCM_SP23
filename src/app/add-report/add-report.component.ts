@@ -209,7 +209,21 @@ export class AddReportComponent implements OnInit {
   Misc Functions
   */
   parseDateIntoString(date:Date){
-    return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
+    var daybuffer: string;
+    var monthbuffer: string;
+    
+    daybuffer = String(date.getDate());
+    monthbuffer = String(date.getMonth() + 1);
+
+    if (date.getDate() <= 9){
+      daybuffer = '0' + date.getDate();
+    }
+
+    if ((date.getMonth() + 1) <= 9){
+      monthbuffer = '0' + (date.getMonth() + 1);
+    }
+
+    return String(monthbuffer + "/" + daybuffer + "/" + date.getFullYear());
   }
 
   onNoClick(): void {

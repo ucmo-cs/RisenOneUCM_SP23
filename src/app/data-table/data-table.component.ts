@@ -67,6 +67,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         those as missing days. The user will then be able to edit the missing days'
         data
         */
+        (async () => { 
         let fake_Current_Date = this.subDays(new Date);
         let current_date = new Date();
         let last_Date;
@@ -79,6 +80,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         
 
         //spaghetti code 
+        
         if (last_Date != undefined){
           this.globalLastDate = new Date(this.parseDateIntoString(last_Date));
 
@@ -105,6 +107,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
             //while 'last date' does not equal current date, keeps adding until it catches up
             //to current date - 1 day
+            
             try {
               while(last_Date.getDate() != fake_Current_Date.getDate()){
 
@@ -128,7 +131,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   Below will include a call to reportService in order to add data equalivent
                   to count
                   */
-                  (async () => { 
+                  
                     //console.log(reportData);
                     // Do something before delay
           
@@ -137,13 +140,15 @@ export class DataTableComponent implements OnInit, OnDestroy {
                     */
                     this.toggleLayer = true;
 
-                    //this.addreportService.saveReport(reportData).subscribe();
-            
-                    //await this.delay(3500);
+                    //await this.delay(1500);
 
-                    location.reload();
+                    this.addreportService.saveReport(reportData).subscribe();
+            
+                    await this.delay(1500);
+
+                    //location.reload();
               
-                  })(); 
+                  
 
                   count++;
                 }
@@ -158,6 +163,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
             */
           }
         }
+      })();
+        
 
         if(this.globalCount != 0 && this.globalCount != undefined){
           var param = {
@@ -174,12 +181,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
           //this.openPopup(param);
           console.log("You have missed " + this.globalCount + " week days");
         }
-      },
-        (err: HttpErrorResponse) => {
-          console.log(err);
-        }));
       
-  }
+     location.reload();
+  },
+  (err: HttpErrorResponse) => {
+    console.log(err);
+  }));
+}
 
   /*
   Misc functions
@@ -190,7 +198,21 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
 
   parseDateIntoString(date:Date){
-    return String((date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear());
+    var daybuffer: string;
+    var monthbuffer: string;
+    
+    daybuffer = String(date.getDate());
+    monthbuffer = String(date.getMonth() + 1);
+
+    if (date.getDate() <= 9){
+      daybuffer = '0' + date.getDate();
+    }
+
+    if ((date.getMonth() + 1) <= 9){
+      monthbuffer = '0' + (date.getMonth() + 1);
+    }
+
+    return String(monthbuffer + "/" + daybuffer + "/" + date.getFullYear());
   }
 
   addDays(date:Date){
