@@ -24,11 +24,25 @@ exports.handler = async (event) => {
         await ddb.update(eventBuffer).promise();
         
         
-        response = {statusCode: 200,body: "success"};
+        response = {
+            "statusCode": 200,
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
+            "body": "success"
+        };
     }
     
     catch(exception){
-        response = {statusCode: 500, body : exception};
+        response = {
+            "statusCode": 500,
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
+            "body" : JSON.stringify({"Message": exception})
+        };
     }
     
     return response; 
