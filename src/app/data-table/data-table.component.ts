@@ -67,7 +67,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
         those as missing days. The user will then be able to edit the missing days'
         data
         */
+        let continue1 = false;
         (async () => { 
+        
         let fake_Current_Date = this.subDays(new Date);
         let current_date = new Date();
         let last_Date;
@@ -107,11 +109,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
             //while 'last date' does not equal current date, keeps adding until it catches up
             //to current date - 1 day
+            var checker = last_Date;
             
             try {
+              last_Date = this.addDays(last_Date);
               while(last_Date.getDate() != fake_Current_Date.getDate()){
 
-                last_Date = this.addDays(last_Date);
+                
   
                 /*
                 Checks if day is not sunday or saturday then adds report data accordingly
@@ -142,17 +146,21 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
                     //await this.delay(1500);
 
-                    this.addreportService.saveReport(reportData).subscribe();
+                    //this.addreportService.saveReport(reportData).subscribe();
             
-                    await this.delay(1500);
+                    await this.delay(1000);
 
                     //location.reload();
               
                   
+                  
 
                   count++;
                 }
+                last_Date = this.addDays(last_Date);
               }
+
+              continue1 = true;
               this.globalCount = count;
             } catch (error) {
               
@@ -182,12 +190,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
           console.log("You have missed " + this.globalCount + " week days");
         }
       
-     location.reload();
+     
     })();
+    //alert("Done Please Reload Page");
   },
   (err: HttpErrorResponse) => {
     console.log(err);
   }));
+  alert("DONE");
 }
 
   /*
