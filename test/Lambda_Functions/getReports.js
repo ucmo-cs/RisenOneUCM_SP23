@@ -15,6 +15,10 @@ exports.handler = async event => {
         
         response = {
             "statusCode": 200,
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
             "body": JSON.stringify(reports),
         };
         
@@ -25,6 +29,10 @@ exports.handler = async event => {
         console.error(exception);
         response = {
             "statusCode": 500,
+            "headers": {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            },
             "body": JSON.stringify({"Message: " : exception}),
         };
     }
