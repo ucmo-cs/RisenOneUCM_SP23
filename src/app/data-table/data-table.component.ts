@@ -163,7 +163,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
             */
           }
         }
-      })();
+      
         
 
         if(this.globalCount != 0 && this.globalCount != undefined){
@@ -183,6 +183,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         }
       
      location.reload();
+    })();
   },
   (err: HttpErrorResponse) => {
     console.log(err);
