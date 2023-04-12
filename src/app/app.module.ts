@@ -31,6 +31,9 @@ import {
 } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
+export function tokenGetter(){
+  return localStorage.getItem(LOCALSTORAGE_TOKEN_KEY)
+}
 //This is a push test
 //console.log ("test");
 @NgModule({
