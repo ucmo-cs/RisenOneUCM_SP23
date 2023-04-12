@@ -25,10 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PDF_FormatComponent } from './pdf-format/pdf-format.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule } from '@angular/router';
-import {
-  SocialLoginModule,
-  SocialAuthServiceConfig,
-} from '@abacritt/angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig, } from '@abacritt/angularx-social-login';
 import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
 export const LOCALSTORAGE_TOKEN_KEY = 'angular_material_login_and_register_example';
 export function tokenGetter(){
