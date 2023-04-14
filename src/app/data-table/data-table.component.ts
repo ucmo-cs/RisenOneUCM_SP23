@@ -39,16 +39,18 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /*Initialization of data table*/
+    
     this.subs.add(this.reportService.getAllReports()
     .subscribe((res) => {
-      this.dataArray =  JSON.parse(res.body);
-      for(let i = 0; i < this.dataArray.Items.length; i++){
-        if(this.dataArray.Items[i].report_status === "Missing"){
-          this.dataArray.Items[i].report_status = "<b>Missing</b>";
+      //console.log(res.Items);
+      this.dataArray =  res.Items;
+      for(let i = 0; i < this.dataArray.length; i++){
+        if(this.dataArray[i].report_status === "Missing"){
+          this.dataArray[i].report_status = "<b>Missing</b>";
         }
       }
 
-      this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
+      this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
 
@@ -153,7 +155,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
     //alert("Done Please Reload Page");
   },
   (err: HttpErrorResponse) => {console.log(err);}));
-  alert("DONE");
+  //alert("DONE");
 }
   /*Misc functions*/
 
