@@ -51,11 +51,12 @@ export class AddReportComponent implements OnInit {
   }
   
     
+  report_id: string;
+  account_id:string;
+
   reportData : Report_Data = {
     "Item": {
       "date": "",
-      "id": "",
-      "account_id": "",
       "report_status": "",
       "projects": "",
       "project_text": ""
@@ -106,9 +107,9 @@ export class AddReportComponent implements OnInit {
       this.reportData.Item.date = this.parseDateIntoString(this.dateControl.value!);
       this.reportData.Item.projects = "TBD";
       this.reportData.Item.project_text = this.reportTextControl.value!;
-      this.reportData.Item.account_id = "Bob Test"; 
+      this.account_id = "Bob Test"; 
       this.reportData.Item.report_status = "Submitted";
-      this.reportData.Item.id =  this.makeRandom();
+      this.report_id =  this.makeRandom();
       console.log((document.getElementById("report_text") as HTMLInputElement).value);
     }
     catch(exception){
@@ -121,9 +122,9 @@ export class AddReportComponent implements OnInit {
       this.reportData.Item.date = this.data.date;//dateBuffer;
       this.reportData.Item.projects = this.data.projects;
       this.reportData.Item.project_text = this.reportTextControl.value!;
-      this.reportData.Item.account_id = this.data.account_id;
+      this.account_id = this.data.account_id;
       this.reportData.Item.report_status = "Submitted";
-      this.reportData.Item.id =  this.data.id;
+      this.report_id =  this.data.id;
     }
     catch(exception){
       return exception;
@@ -155,13 +156,13 @@ export class AddReportComponent implements OnInit {
           Disables page and then saves report
           */
           this.toggleLayer = true;
-          this.addreportService.saveReport(this.reportData).subscribe();
+          this.addreportService.saveReport(this.reportData, this.account_id, this.report_id).subscribe();
   
           await this.delay(3000);
   
           // Do something after
           this.dialogRef.close();
-          location.reload();
+          //location.reload();
         })();
         
       }
