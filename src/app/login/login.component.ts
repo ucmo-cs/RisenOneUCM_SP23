@@ -22,4 +22,9 @@ export class LoginComponent {
   callbackFunction(){
     console.log("TEST");
   }
+
+  login() {
+    if (!this.loginForm.valid)
+    return;
+  }
 }
