@@ -39,7 +39,6 @@ export class AddReportService {
 
         let headers = new HttpHeaders(
           { 
-            'Access-Control-Allow-Origin': '*',
             'id': String(report_id),
             'account_id': String(account_id),
           }  
@@ -52,7 +51,7 @@ export class AddReportService {
         .pipe(
           //catchError(this.handleError)
           catchError((error: any, caught: Observable<any>): Observable<any> => {
-            console.error('There was an error!', error);
+            console.error('There was an error!', JSON.stringify(error));
 
             return error.message;
           }
