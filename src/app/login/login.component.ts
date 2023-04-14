@@ -14,12 +14,12 @@ export class LoginComponent {
       private socialAuthService: SocialAuthService) {
   }
 
-  callbackFunction(){
-    console.log("TEST");
-  }
-
   loginForm: FormGroup = new FormGroup({
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, [Validators.required]),
   });
+
+  callbackFunction(){
+    console.log("TEST");
+  }
 }
