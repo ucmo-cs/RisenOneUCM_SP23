@@ -33,7 +33,19 @@ functions:
       - http:
           path: add-report
           method: post
-          cors: true
+          cors: 
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - X-Amzn-Trace-Id
+              - id
+              - account_id
+            allowCredentials: false
   list:
     handler: Lambda_Functions/getReports.handler
     events:
@@ -48,7 +60,19 @@ functions:
       - http:
           path: get-one-report
           method: get
-          cors: true
+          cors: 
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - X-Amzn-Trace-Id
+              - id
+              - account_id
+            allowCredentials: false
 
   listForAccount:
     handler: Lambda_Functions/getReportsForAccount.handler
@@ -56,7 +80,18 @@ functions:
       - http:
           path: list-reports-for-account
           method: get
-          cors: true
+          cors: 
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - X-Amzn-Trace-Id
+              - account_id
+            allowCredentials: false
 
   update:
     handler: Lambda_Functions/editReport.handler
@@ -64,5 +99,18 @@ functions:
       - http:
           path: update-report
           method: put
-          cors: true
+          cors: 
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Amz-Date
+              - Authorization
+              - X-Api-Key
+              - X-Amz-Security-Token
+              - X-Amz-User-Agent
+              - X-Amzn-Trace-Id
+              - id
+              - account_id
+            allowCredentials: false
+
   
