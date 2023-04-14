@@ -4,22 +4,35 @@ var AWS = require('aws-sdk');
 // Create the DynamoDB service object
 var ddb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
-let eventBuffer = {TableName: "Report",Item:"", UpdateExpression: '', ExpressionAttributeValues: ''}; 
+let eventBuffer = {
+    "TableName": "Report",
+    "Key": "",
+    //"Item": "",
+    "UpdateExpression": "",
+    "ExpressionAttributeValues": ""
+}; 
 
 exports.handler = async (event) => {
     let response;
     let bufferKey;
     try{
-        let itemkeyBuffer = event.Item.id;
-        let accountkeyBuffer = event.Item.account_id;
+        let itemkeyBuffer = event.headers.id;
+        let accountkeyBuffer = event.headers.account_id;
         //requires primary key and sort key fields to work
         bufferKey = { "id":itemkeyBuffer,"account_id": accountkeyBuffer};
-        eventBuffer.Item = event.Item;
+        // eventBuffer.Item = {
+        //     "id": event.headers.id,
+        //     "account_id": event.headers.account_id,
+        //     "date": event.body.date,
+        //     "report_status": event.body.report_status,
+        //     "projects": event.body.projects,
+        //     "project_text": event.body.project_text,
+        // };
         eventBuffer.Key = bufferKey;
       
         
         eventBuffer.UpdateExpression = "set project_text = :r, report_status = :n ";
-        eventBuffer.ExpressionAttributeValues = {":r" : event.Item.project_text, ":n" : event.Item.report_status};
+        eventBuffer.ExpressionAttributeValues = {":r" : event.body.project_text, ":n" : event.body.report_status};
         
         await ddb.update(eventBuffer).promise();
         
