@@ -39,12 +39,7 @@ exports.handler = async (event) => {
             ":n" : data.report_status
         };
         eventBuffer.UpdateExpression = "SET project_text = :r, report_status = :n ";
-        console.log(event.body);
-        console.log(event.body.report_status);
-        console.log(event.body.project_text);
-        console.log(data.report_status);
-        console.log(data.project_text);
-        console.log(eventBuffer.ExpressionAttributeValues);
+
         await ddb.update(eventBuffer).promise();
         
         
