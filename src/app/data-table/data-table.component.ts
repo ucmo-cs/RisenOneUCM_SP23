@@ -102,7 +102,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
               
             try {
               last_Date = this.addDays(last_Date);
-              while(last_Date.getDate() != fake_Current_Date.getDate()){
+              while(last_Date <= fake_Current_Date){
                 /*Checks if day is not sunday or saturday then adds report data accordingly*/
                 if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
                   console.log('while looping...'+count+'\n'+last_Date);
@@ -123,11 +123,9 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   /*Disables page and then updates report*/
                   this.toggleLayer = true;
                   //await this.delay(1500);
-                  
-                  //Disabled for now
-                  /*this.addreportService.saveReport(reportData, reportData.Item.account_id, reportData.Item.id).subscribe();
-                  await this.delay(1000);
-                  location.reload();*/
+                  this.addreportService.saveReport(reportData).subscribe();
+                  await this.delay(500);
+                  //location.reload();
                   count++;
                 }
                 last_Date = this.addDays(last_Date);
@@ -150,12 +148,12 @@ export class DataTableComponent implements OnInit, OnDestroy {
             the user confirms.*/
             //this.openPopup(param);
             console.log("You have missed " + this.globalCount + " week days");
+            location.reload();
           }
       })();
     //alert("Done Please Reload Page");
   },
   (err: HttpErrorResponse) => {console.log(err);}));
-  //alert("DONE");
 }
   /*Misc functions*/
 
@@ -187,10 +185,11 @@ delay(ms: number) {
   }
 
   subDays(date:Date){
-    if(date.getDay() != 0 && date.getDay() != 6){
+    if(date.getDay()-1 == 0){
+      date.setDate(date.getDate()-3);
+      console.log(date);
+    }else if(date.getDay() != 0 && date.getDay() != 6){
       date.setDate(date.getDate() - 1);
-    }else if(date.getDay()-1 == 0){
-      date.setDate(date.getDate() - 2);
     }
     return date;
 
