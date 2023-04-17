@@ -15,11 +15,15 @@ let eventBuffer = {
 exports.handler = async (event) => {
     let response;
     let bufferKey;
+    let data = JSON.parse(event.body);
     try{
         let itemkeyBuffer = event.headers.id;
         let accountkeyBuffer = event.headers.account_id;
         //requires primary key and sort key fields to work
-        bufferKey = { "id":itemkeyBuffer,"account_id": accountkeyBuffer};
+        bufferKey = {
+            "id":itemkeyBuffer,
+            "account_id": accountkeyBuffer
+        };
         // eventBuffer.Item = {
         //     "id": event.headers.id,
         //     "account_id": event.headers.account_id,
@@ -30,10 +34,17 @@ exports.handler = async (event) => {
         // };
         eventBuffer.Key = bufferKey;
       
-        
-        eventBuffer.UpdateExpression = "set project_text = :r, report_status = :n ";
-        eventBuffer.ExpressionAttributeValues = {":r" : event.body.project_text, ":n" : event.body.report_status};
-        
+        eventBuffer.ExpressionAttributeValues = {
+            ":r" : data.project_text,
+            ":n" : data.report_status
+        };
+        eventBuffer.UpdateExpression = "SET project_text = :r, report_status = :n ";
+        console.log(event.body);
+        console.log(event.body.report_status);
+        console.log(event.body.project_text);
+        console.log(data.report_status);
+        console.log(data.project_text);
+        console.log(eventBuffer.ExpressionAttributeValues);
         await ddb.update(eventBuffer).promise();
         
         
