@@ -59,6 +59,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       equal to the amount of days missed. On weekends, however, it does not count 
       those as missing days. The user will then be able to edit the missing days'
       data*/
+      console.log(this.dataArray)
       let continue1 = false;
       (async () => { 
         
@@ -67,7 +68,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
         
         let last_Date;
         try {
-          last_Date = this.findMaxDateObject(this.dataArray.Items);
+          last_Date = this.findMaxDateObject(this.dataArray);
         }catch (error) {}
 
         //spaghetti code       

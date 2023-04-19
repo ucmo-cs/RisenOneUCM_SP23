@@ -1,30 +1,27 @@
-import { Component } from '@angular/core';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
-import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-    constructor(private router: Router,
-      private socialAuthService: SocialAuthService) {
+export class LoginComponent implements OnInit {
+
+  toggleLayer = false;
+    constructor()
+       {
+  }
+  ngOnInit(): void {
+    
   }
 
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    password: new FormControl(null, [Validators.required]),
-  });
-
-  callbackFunction(){
-    console.log("TEST");
+  onLogin(loginForm:NgForm ){
+          console.log(loginForm.value)
   }
 
-  login() {
-    if (!this.loginForm.valid)
-    return;
-  }
+
+  
 }
