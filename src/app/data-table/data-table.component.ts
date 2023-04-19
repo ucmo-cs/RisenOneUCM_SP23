@@ -70,8 +70,6 @@ export class DataTableComponent implements OnInit, OnDestroy {
         try {
           last_Date = this.findMaxDateObject(this.dataArray);
         }catch (error) {}
-        console.log(this.dataArray[0].date);
-        console.log(last_Date);
 
         //spaghetti code       
         if (last_Date != undefined){

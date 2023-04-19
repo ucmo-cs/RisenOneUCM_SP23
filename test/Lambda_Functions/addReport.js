@@ -48,7 +48,7 @@ exports.handler = async (event) => {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Credentials': true,
             },
-            "body": JSON.stringify(exception)
+            "body": JSON.stringify({"Message": exception})
         };
     }
     
