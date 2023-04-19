@@ -12,4 +12,8 @@ export class TopBarComponent {
     console.log('test success');
   }
 
+  logout(){
+    localStorage.clear();
+  }
+
 }

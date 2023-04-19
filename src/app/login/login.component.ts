@@ -11,15 +11,19 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   toggleLayer = false;
-    constructor()
-       {
-  }
+  
+  constructor(private _router: Router) { }
+
   ngOnInit(): void {
-    
   }
 
   onLogin(loginForm:NgForm ){
-          console.log(loginForm.value)
+          //console.log(loginForm.value);
+          //console.log(loginForm.value.userName);
+          
+          localStorage.setItem("account_id", loginForm.value.userName);
+
+          this._router.navigate(["data-table-component"]);
   }
 
 

@@ -39,8 +39,16 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     /*Initialization of data table*/
+
+    let id = "Null";
+
+      if(localStorage.getItem("account_id") != null){
+        
+        id = localStorage.getItem("account_id")!;
+        //console.log(id);
+      }
     
-    this.subs.add(this.reportService.getAllReports()
+    this.subs.add(this.reportService.getAllReportsForAccount(id)//this.reportService.getAllReports()
     .subscribe((res) => {
       //console.log(res.Items);
       this.dataArray =  res.Items;

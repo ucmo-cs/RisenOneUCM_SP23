@@ -19,7 +19,7 @@
           <mat-icon>settings</mat-icon>
           <span>testing</span>
         </button>
-        <button mat-menu-item routerLink="/login-component" routerLinkActive="active-link">
+        <button mat-menu-item routerLink="/login-component" (click) = "logout()" routerLinkActive="active-link">
           <mat-icon>exit_to_app</mat-icon>
           <span>Log Out</span>
         </button>
