@@ -3,6 +3,7 @@ import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular
 import { Observable, throwError, catchError } from 'rxjs';
 import { Report_Data } from '/workspaces/RisenOneUCM_SP23/src/app/data-table/report_data';
 import { API_Data } from './api_data';
+import { Old_Report_Data } from './OldReportData';
 
 export interface ResponseData{
   statusCode: string,
@@ -73,9 +74,9 @@ export class AddReportService {
       );
   }*/
 
-  updateReport(exportBody:Report_Data): Observable<Report_Data>{
+  updateReport(exportBody:Old_Report_Data): Observable<Old_Report_Data>{
     const URL = `${this.basePATCHURL}`;
-    return this.http.put<Report_Data>(URL, exportBody)
+    return this.http.put<Old_Report_Data>(URL, exportBody)
     .pipe(
       catchError(this.handleError)
     );

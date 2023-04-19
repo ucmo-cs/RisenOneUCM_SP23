@@ -8,6 +8,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { FormControl } from '@angular/forms';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Old_Report_Data } from './OldReportData';
 
 @Component({
   selector: 'app-add-report',
@@ -56,6 +57,17 @@ export class AddReportComponent implements OnInit {
 
   reportData : Report_Data = {
     "Item": {
+      "date": "",
+      "report_status": "",
+      "projects": "",
+      "project_text": ""
+    }
+  };
+
+  oldreportData : Old_Report_Data = {
+    "Item": {
+      "id": "",
+      "account_id": "",
       "date": "",
       "report_status": "",
       "projects": "",
@@ -125,6 +137,14 @@ export class AddReportComponent implements OnInit {
       this.account_id = this.data.account_id;
       this.reportData.Item.report_status = "Submitted";
       this.report_id =  this.data.id;
+
+      //Delete this below when fixed
+      this.oldreportData.Item.date = this.data.date;//dateBuffer;
+      this.oldreportData.Item.projects = this.data.projects;
+      this.oldreportData.Item.project_text = this.reportTextControl.value!;
+      this.oldreportData.Item.account_id = this.data.account_id;
+      this.oldreportData.Item.report_status = "Submitted";
+      this.oldreportData.Item.id =  this.data.id;
     }
     catch(exception){
       return exception;
@@ -192,7 +212,7 @@ export class AddReportComponent implements OnInit {
           Disables page and then updates report
           */
           this.toggleLayer = true;
-          this.addreportService.updateReport(this.reportData).subscribe();
+          this.addreportService.updateReport(this.oldreportData).subscribe();
   
           await this.delay(3000);
   
