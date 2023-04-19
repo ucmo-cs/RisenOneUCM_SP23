@@ -59,6 +59,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       equal to the amount of days missed. On weekends, however, it does not count 
       those as missing days. The user will then be able to edit the missing days'
       data*/
+      console.log(this.dataArray)
       let continue1 = false;
       (async () => { 
         
@@ -67,8 +68,10 @@ export class DataTableComponent implements OnInit, OnDestroy {
         
         let last_Date;
         try {
-          last_Date = this.findMaxDateObject(this.dataArray.Items);
+          last_Date = this.findMaxDateObject(this.dataArray);
         }catch (error) {}
+        console.log(this.dataArray[0].date);
+        console.log(last_Date);
 
         //spaghetti code       
         if (last_Date != undefined){
@@ -123,8 +126,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   /*Disables page and then updates report*/
                   this.toggleLayer = true;
                   //await this.delay(1500);
-                  //this.addreportService.saveReport(reportData, ).subscribe();
-                  //await this.delay(500);
+                  this.addreportService.saveReport(reportData, reportData.Item.account_id, reportData.Item.id).subscribe();
+                  await this.delay(500);
                   //location.reload();
                   count++;
                 }
