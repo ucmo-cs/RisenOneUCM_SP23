@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, last } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { DataTableService } from './data-table.service';
@@ -22,18 +22,14 @@ import { AddReportService } from '../add-report/add-report.service';
 export class DataTableComponent implements OnInit, OnDestroy {
 
   private subs = new Subscription();
-
   displayedColumns: any[] = ['date','projects','report_status',];
-
   public dataSource: MatTableDataSource<Report_Data>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   private dataArray: any;
-
   private globalCount: number;
-
   private globalLastDate: Date;
 
   toggleLayer = false;
@@ -42,51 +38,46 @@ export class DataTableComponent implements OnInit, OnDestroy {
     private addreportService: AddReportService, private matDialog: MatDialog) { }
 
   ngOnInit() {
-    /*
-    Initialization of data table
-    */
+    /*Initialization of data table*/
+    
     this.subs.add(this.reportService.getAllReports()
-      .subscribe((res) => {
-        this.dataArray =  JSON.parse(res.body);
-        for(let i = 0; i < this.dataArray.Items.length; i++){
-            if(this.dataArray.Items[i].report_status === "Missing"){
-              this.dataArray.Items[i].report_status = "<b>Missing</b>";
-            }
+    .subscribe((res) => {
+      //console.log(res.Items);
+      this.dataArray =  res.Items;
+      for(let i = 0; i < this.dataArray.length; i++){
+        if(this.dataArray[i].report_status === "Missing"){
+          this.dataArray[i].report_status = "<b>Missing</b>";
         }
+      }
 
-        this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
-      
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
 
-       
-        /*
-        All the following code until 'parseDateIntoString' pertains to how the app
-        handles missing days. Essentially, the front-end will run the addReportService
-        equal to the amount of days missed. On weekends, however, it does not count 
-        those as missing days. The user will then be able to edit the missing days'
-        data
-        */
-        let continue1 = false;
-        (async () => { 
+      /*All the following code until 'parseDateIntoString' pertains to how the app
+      handles missing days. Essentially, the front-end will run the addReportService
+      equal to the amount of days missed. On weekends, however, it does not count 
+      those as missing days. The user will then be able to edit the missing days'
+      data*/
+      console.log(this.dataArray)
+      let continue1 = false;
+      (async () => { 
         
         let fake_Current_Date = this.subDays(new Date);
         let current_date = new Date();
+        
         let last_Date;
-
         try {
-          last_Date = this.findMaxDateObject(this.dataArray.Items);
-        } catch (error) {
-          
-        }
-        
+          last_Date = this.findMaxDateObject(this.dataArray);
+        }catch (error) {}
 
-        //spaghetti code 
-        
+        //spaghetti code       
         if (last_Date != undefined){
           this.globalLastDate = new Date(this.parseDateIntoString(last_Date));
 
           console.log(this.globalLastDate);
+          console.log('fake current date value :\n'+fake_Current_Date);
+
           let var1 = last_Date.getDate();
           let var2 = last_Date.getFullYear();
           let var3 = last_Date.getMonth();
@@ -94,14 +85,13 @@ export class DataTableComponent implements OnInit, OnDestroy {
           let var4 = fake_Current_Date.getDate();
           let var5 = fake_Current_Date.getFullYear();
           let var6 = fake_Current_Date.getMonth();
-          
+            
           let var7 = current_date.getDate();
           let var8 = current_date.getFullYear();
           let var9 = current_date.getMonth();
 
           //serves no purpose other than to allow else if to exist
           if(var1 == var7 && var2 == var8 && var3 == var9){}
-
           //checks if last date is not equal to fake current date (current date - 1 day)
           else if(var1 != var4 || var2 != var5 || var3 != var6 ){
             //setting counter up for # of iterations
@@ -110,17 +100,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
             //while 'last date' does not equal current date, keeps adding until it catches up
             //to current date - 1 day
             var checker = last_Date;
-            
+              
             try {
               last_Date = this.addDays(last_Date);
-              while(last_Date.getDate() != fake_Current_Date.getDate()){
-
-                
-  
-                /*
-                Checks if day is not sunday or saturday then adds report data accordingly
-                */
+              while(last_Date <= fake_Current_Date){
+                /*Checks if day is not sunday or saturday then adds report data accordingly*/
                 if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
+                  console.log('while looping...'+count+'\n'+last_Date);
+
                   let reportData = {
                     "Item": {
                       "date": this.parseDateIntoString(last_Date),
@@ -131,82 +118,49 @@ export class DataTableComponent implements OnInit, OnDestroy {
                       "project_text": "Auto-generated"
                     }
                   };
-                  /*
-                  Below will include a call to reportService in order to add data equalivent
-                  to count
-                  */
-                  
-                    //console.log(reportData);
-                    // Do something before delay
-          
-                    /*
-                    Disables page and then updates report
-                    */
-                    //this.toggleLayer = true;
-
-                    //await this.delay(1500);
-
-                    //this.addreportService.saveReport(reportData).subscribe();
-            
-                   // await this.delay(1000);
-
-                    //location.reload();
-              
-                  
-                  
-
+                  /*Below will include a call to reportService in order to add data equalivent to count*/
+                  //console.log(reportData);
+                  //Do something before delay
+                  /*Disables page and then updates report*/
+                  this.toggleLayer = true;
+                  //await this.delay(1500);
+                  this.addreportService.saveReport(reportData, reportData.Item.account_id, reportData.Item.id).subscribe();
+                  await this.delay(500);
+                  //location.reload();
                   count++;
                 }
                 last_Date = this.addDays(last_Date);
               }
 
-              continue1 = true;
-              this.globalCount = count;
-            } catch (error) {
-              
+                continue1 = true;
+                this.globalCount = count;
+            } catch (error) {}
+              /*Pop up prompt here and then on confirmation it reloads page*/
+          }
+        }
+   
+          if(this.globalCount != 0 && this.globalCount != undefined){
+            var param = {
+              'count': this.globalCount,
+              'lastdate': this.globalLastDate,
             }
-
-            /*
-            Pop up prompt here and then on confirmation it reloads page
-            */
+            /*Pop-up for missing days below. Should notify users when the last update
+            was, and how many days the user has missed. Will require a refresh after
+            the user confirms.*/
+            //this.openPopup(param);
+            console.log("You have missed " + this.globalCount + " week days");
+            location.reload();
           }
-        }
-      
-        
-
-        if(this.globalCount != 0 && this.globalCount != undefined){
-          var param = {
-            'count': this.globalCount,
-            'lastdate': this.globalLastDate,
-          }
-
-          /*
-          Pop-up for missing days below. Should notify users when the last update
-          was, and how many days the user has missed. Will require a refresh after
-          the user confirms.
-          */
-
-          //this.openPopup(param);
-          console.log("You have missed " + this.globalCount + " week days");
-        }
-      
-     
-    })();
+      })();
     //alert("Done Please Reload Page");
   },
-  (err: HttpErrorResponse) => {
-    console.log(err);
-  }));
-  alert("DONE");
+  (err: HttpErrorResponse) => {console.log(err);}));
 }
+  /*Misc functions*/
 
-  /*
-  Misc functions
-  */
-
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-  }
+delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
 
   parseDateIntoString(date:Date){
     var daybuffer: string;
@@ -232,8 +186,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
   }
 
   subDays(date:Date){
-    date.setDate(date.getDate() - 1);
+    if(date.getDay()-1 == 0){
+      date.setDate(date.getDate()-3);
+      console.log(date);
+    }else if(date.getDay() != 0 && date.getDay() != 6){
+      date.setDate(date.getDate() - 1);
+    }
     return date;
+
   }
   ngAfterViewInit(){
     //console.log('test')
@@ -286,11 +246,19 @@ export class DataTableComponent implements OnInit, OnDestroy {
 
   findMaxDateObject(dateArray:any){
     var max = new Date(dateArray[0].date);
+    console.log('initial max date value: \n' + max);
+    console.log('iterating '+dateArray.length+' items')
     for(let i = 0; i < dateArray.length; i++){
       if(new Date(dateArray[i].date) > max){
-        max = dateArray[i].date;
+        max = new Date(dateArray[i].date);
+        console.log('finding max date..\n'+ max);
       }
+      /*for debugging, prints out all the dates the algorithm skips over*/
+      /*else{
+        console.log('skipping over...... '+new Date(dateArray[i].date))
+      }*/
     }
+    console.log('max date object found:\n'+max);
     return new Date(max);
   }
 

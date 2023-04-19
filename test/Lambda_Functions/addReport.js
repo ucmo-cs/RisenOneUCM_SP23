@@ -9,18 +9,23 @@ var ddb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 
 exports.handler = async (event) => {
     let response;
+
     try{
+        let eventtest = JSON.parse(event.body);
+        
         const eventBuffer = {
             "TableName": "Report",
             "Item": {
                 "id": event.headers.id,
                 "account_id": event.headers.account_id,
-                "date": event.body.date,
-                "report_status": event.body.report_status,
-                "projects": event.body.projects,
-                "project_text": event.body.project_text,
+                "date": eventtest.Item.date,
+                "report_status": eventtest.Item.report_status,
+                "projects": eventtest.Item.projects,
+                "project_text": eventtest.Item.project_text,
             },
         };
+        
+        
         
         await ddb.put(eventBuffer).promise();
         
@@ -43,7 +48,7 @@ exports.handler = async (event) => {
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Credentials': true,
             },
-            "body": JSON.stringify(exception)
+            "body": JSON.stringify({"Message": exception})
         };
     }
     

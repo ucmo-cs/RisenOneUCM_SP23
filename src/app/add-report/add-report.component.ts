@@ -8,6 +8,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 import { FormControl } from '@angular/forms';
 import { DataTableComponent } from '../data-table/data-table.component';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { Old_Report_Data } from './OldReportData';
 
 @Component({
   selector: 'app-add-report',
@@ -51,11 +52,23 @@ export class AddReportComponent implements OnInit {
   }
   
     
+  report_id: string;
+  account_id:string;
+
   reportData : Report_Data = {
     "Item": {
       "date": "",
+      "report_status": "",
+      "projects": "",
+      "project_text": ""
+    }
+  };
+
+  oldreportData : Old_Report_Data = {
+    "Item": {
       "id": "",
       "account_id": "",
+      "date": "",
       "report_status": "",
       "projects": "",
       "project_text": ""
@@ -106,9 +119,9 @@ export class AddReportComponent implements OnInit {
       this.reportData.Item.date = this.parseDateIntoString(this.dateControl.value!);
       this.reportData.Item.projects = "TBD";
       this.reportData.Item.project_text = this.reportTextControl.value!;
-      this.reportData.Item.account_id = "Bob Test"; 
+      this.account_id = "Bob Test"; 
       this.reportData.Item.report_status = "Submitted";
-      this.reportData.Item.id =  this.makeRandom();
+      this.report_id =  this.makeRandom();
       console.log((document.getElementById("report_text") as HTMLInputElement).value);
     }
     catch(exception){
@@ -121,9 +134,17 @@ export class AddReportComponent implements OnInit {
       this.reportData.Item.date = this.data.date;//dateBuffer;
       this.reportData.Item.projects = this.data.projects;
       this.reportData.Item.project_text = this.reportTextControl.value!;
-      this.reportData.Item.account_id = this.data.account_id;
+      this.account_id = this.data.account_id;
       this.reportData.Item.report_status = "Submitted";
-      this.reportData.Item.id =  this.data.id;
+      this.report_id =  this.data.id;
+
+      //Delete this below when fixed
+      this.oldreportData.Item.date = this.data.date;//dateBuffer;
+      this.oldreportData.Item.projects = this.data.projects;
+      this.oldreportData.Item.project_text = this.reportTextControl.value!;
+      this.oldreportData.Item.account_id = this.data.account_id;
+      this.oldreportData.Item.report_status = "Submitted";
+      this.oldreportData.Item.id =  this.data.id;
     }
     catch(exception){
       return exception;
@@ -155,13 +176,14 @@ export class AddReportComponent implements OnInit {
           Disables page and then saves report
           */
           this.toggleLayer = true;
-          this.addreportService.saveReport(this.reportData).subscribe();
+          //console.log(this.reportData);
+          this.addreportService.saveReport(this.reportData, this.account_id, this.report_id).subscribe();
   
           await this.delay(3000);
   
           // Do something after
           this.dialogRef.close();
-          location.reload();
+          //location.reload();
         })();
         
       }
@@ -190,7 +212,7 @@ export class AddReportComponent implements OnInit {
           Disables page and then updates report
           */
           this.toggleLayer = true;
-          this.addreportService.updateReport(this.reportData).subscribe();
+          this.addreportService.updateReport(this.oldreportData).subscribe();
   
           await this.delay(3000);
   
