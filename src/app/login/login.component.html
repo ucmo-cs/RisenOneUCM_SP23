@@ -1,23 +1,33 @@
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<div class = "login-wrapper">
-    <h1>Employee Login Page</h1>
-    <a class="button" routerLink="/data-table-component">Table</a>
-</div>
+<div class="disable-background" *ngIf="toggleLayer"></div>
 
-<div id="g_id_onload"
-     data-client_id="126800080647-g9ndsbi0eb8dald70e5ph7g40avbrqoh.apps.googleusercontent.com"
-     data-context="signup"
-     data-ux_mode="popup"
-     data-callback="callbackFunction"
-     data-auto_prompt="false">
-</div>
+<app-top-bar></app-top-bar>
 
-<div class="g_id_signin"
-     data-type="icon"
-     data-shape="circle"
-     data-theme="filled_blue"
-     data-text="signin_with"
-     data-size="large">
+<div class = "container mt-5 " style="width: 70%;">
+     <div class = "col-6 m-auto">
+          <div class = "card m-auto">
+               <div class="card-header">
+                    Login               
+               </div>
+               <div class=" card-body">
+                    <form #loginForm = 'ngForm' (ngSubmit)= "onLogin(loginForm)">
+                         <div class="form-group col-12">
+                              <label> Username </label>
+                              <input class="form-control"  #propName = "ngModel" required ngModel name="userName">
+                              <span *ngIf ="!propName.valid && propName.touched" class="error-block">
+                                   Please provide Username
+                              </span>
+                         </div>
+                         <div class="form-group col-12">
+                              <label> Password </label>
+                              <input class="form-control" required type="password" ngModel name="password">
+                         </div>
+                         <div class="form-group col-12">
+                              <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary btn-block mt-2"> Login</button>
+                              
+                         </div>
+                    </form>
+               </div>
+          </div>
+     </div>
 </div>
-
 <router-outlet></router-outlet>
