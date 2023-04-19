@@ -11,8 +11,6 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Report_Data } from '../data-table/report_data';
 import { DataTableService } from '../data-table/data-table.service';
-import { async } from '@angular/core/testing';
-
 
 @Component({
     selector: 'app-pdf-format',
@@ -36,11 +34,11 @@ import { async } from '@angular/core/testing';
     ngOnInit(): void {
         this.sub.add(this.reportService.getAllReports()
       .subscribe((res) => {
-        this.dataArray =  JSON.parse(res.body);
+        this.dataArray =  res.Items;
         
 
     
-      this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray.Items);
+      this.dataSource = new MatTableDataSource<Report_Data>(this.dataArray);
       this.dataSource.sort = this.sort;
       
 
@@ -62,7 +60,7 @@ import { async } from '@angular/core/testing';
             PDF.save('angular-demo.pdf');
             });*/
 
-            html2canvas(document.getElementById('dataTable2')!, {scale: 2}).then(function(canvas){
+            html2canvas(document.getElementById('dataTable2')!, {scale: 3}).then(function(canvas){
                 var wid = canvas.width;
                 var hgt = canvas.height;
                 var img = canvas.toDataURL("image/png", 1.0);
