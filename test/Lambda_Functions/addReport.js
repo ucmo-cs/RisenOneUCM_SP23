@@ -16,10 +16,10 @@ exports.handler = async (event) => {
             "Item": {
                 "id": event.headers.id,
                 "account_id": event.headers.account_id,
-                "date": event.body.date,
-                "report_status": event.body.report_status,
-                "projects": event.body.projects,
-                "project_text": event.body.project_text,
+                "date": event.body.Item.date,
+                "report_status": event.body.Item.report_status,
+                "projects": event.body.Item.projects,
+                "project_text": event.body.Item.project_text,
             },
         };
         

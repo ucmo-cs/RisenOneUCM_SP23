@@ -123,8 +123,8 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   /*Disables page and then updates report*/
                   this.toggleLayer = true;
                   //await this.delay(1500);
-                  this.addreportService.saveReport(reportData).subscribe();
-                  await this.delay(500);
+                  //this.addreportService.saveReport(reportData, ).subscribe();
+                  //await this.delay(500);
                   //location.reload();
                   count++;
                 }

@@ -156,6 +156,7 @@ export class AddReportComponent implements OnInit {
           Disables page and then saves report
           */
           this.toggleLayer = true;
+          //console.log(this.reportData);
           this.addreportService.saveReport(this.reportData, this.account_id, this.report_id).subscribe();
   
           await this.delay(3000);

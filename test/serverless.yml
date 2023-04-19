@@ -9,7 +9,7 @@ provider:
   runtime: nodejs12.x
   # These two lines should hopefully make it easier to type the deploy command.
   region: us-east-2
-  profile: Collin123
+  profile: timothy8312
   iam:
     role:
       statements:
