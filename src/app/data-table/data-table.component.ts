@@ -115,12 +115,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
                 /*Checks if day is not sunday or saturday then adds report data accordingly*/
                 if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
                   console.log('while looping...'+count+'\n'+last_Date);
+                  
+                  let project_id = this.makeRandom();
 
                   let reportData = {
                     "Item": {
                       "date": this.parseDateIntoString(last_Date),
-                      "id": this.makeRandom(),
-                      "account_id": 'Bob Test',
+                      "id": project_id,
+                      "account_id": localStorage.getItem("account_id"),
                       "report_status": "Missing",
                       "projects": "TBD",
                       "project_text": "Auto-generated"
@@ -132,7 +134,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   /*Disables page and then updates report*/
                   this.toggleLayer = true;
                   //await this.delay(1500);
-                  //this.addreportService.saveReport(reportData).subscribe();
+                  this.addreportService.saveReport(reportData, localStorage.getItem("account_id")!, project_id).subscribe();
                   await this.delay(500);
                   //location.reload();
                   count++;
