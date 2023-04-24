@@ -13,6 +13,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { PDF_FormatComponent } from '../pdf-format/pdf-format.component';
 import { AddReportService } from '../add-report/add-report.service';
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-data-table',
@@ -68,6 +69,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       equal to the amount of days missed. On weekends, however, it does not count 
       those as missing days. The user will then be able to edit the missing days'
       data*/
+      this.invalidReport(this.dataArray);
       console.log(this.dataArray)
       let continue1 = false;
       (async () => { 
@@ -282,7 +284,13 @@ delay(ms: number) {
     }
       return text;
   }
-  invalidReport(){
-
+  invalidReport(dataArray:any){
+    var today = new Date();
+    var lastDate = this.findMaxDateObject(dataArray);
+    console.log("INVALID REPORT TEST : "+lastDate.getDay() + "\nTODAY : " + today);
+    if(lastDate.getDay() == today.getDay() && lastDate.getDate() == today.getDate() && lastDate.getFullYear() == today.getFullYear()){
+      this.addReportDisabled = true;
+    }
+    //this.addReportDisabled = true;
   }
 }
