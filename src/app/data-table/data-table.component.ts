@@ -31,6 +31,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
   private dataArray: any;
   private globalCount: number;
   private globalLastDate: Date;
+  public addReportDisabled = false;
 
   toggleLayer = false;
 
@@ -280,5 +281,8 @@ delay(ms: number) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
       return text;
+  }
+  invalidReport(){
+
   }
 }
