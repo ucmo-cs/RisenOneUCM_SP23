@@ -47,8 +47,10 @@ export class AddReportComponent implements OnInit {
       this.employeeNameControl.reset(this.data.account_id);
     }
 
-    //if data.date is not null
-
+    //This is for handling populating the 'add reports' menu
+    else{
+      this.employeeNameControl.reset(localStorage.getItem("account_id"));
+    }
   }
   
     

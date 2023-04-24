@@ -243,7 +243,7 @@ delay(ms: number) {
 
   public openPDF(): void {
     const dialogRef = this.matDialog.open(PDF_FormatComponent, {
-      height: '50%',
+      height: '90%',
       width: '50%',
     })
     
