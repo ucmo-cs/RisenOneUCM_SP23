@@ -13,6 +13,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { PDF_FormatComponent } from '../pdf-format/pdf-format.component';
 import { AddReportService } from '../add-report/add-report.service';
+import { throwDialogContentAlreadyAttachedError } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-data-table',
@@ -31,6 +32,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
   private dataArray: any;
   private globalCount: number;
   private globalLastDate: Date;
+  public addReportDisabled = false;
 
   toggleLayer = false;
 
@@ -67,6 +69,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
       equal to the amount of days missed. On weekends, however, it does not count 
       those as missing days. The user will then be able to edit the missing days'
       data*/
+      this.invalidReport(this.dataArray);
       console.log(this.dataArray)
       let continue1 = false;
       (async () => { 
@@ -115,12 +118,14 @@ export class DataTableComponent implements OnInit, OnDestroy {
                 /*Checks if day is not sunday or saturday then adds report data accordingly*/
                 if(last_Date.getDay() != 0 && last_Date.getDay() != 6){
                   console.log('while looping...'+count+'\n'+last_Date);
+                  
+                  let project_id = this.makeRandom();
 
                   let reportData = {
                     "Item": {
                       "date": this.parseDateIntoString(last_Date),
-                      "id": this.makeRandom(),
-                      "account_id": 'Bob Test',
+                      "id": project_id,
+                      "account_id": localStorage.getItem("account_id"),
                       "report_status": "Missing",
                       "projects": "TBD",
                       "project_text": "Auto-generated"
@@ -132,7 +137,7 @@ export class DataTableComponent implements OnInit, OnDestroy {
                   /*Disables page and then updates report*/
                   this.toggleLayer = true;
                   //await this.delay(1500);
-                  //this.addreportService.saveReport(reportData).subscribe();
+                  this.addreportService.saveReport(reportData, localStorage.getItem("account_id")!, project_id).subscribe();
                   await this.delay(500);
                   //location.reload();
                   count++;
@@ -241,7 +246,7 @@ delay(ms: number) {
 
   public openPDF(): void {
     const dialogRef = this.matDialog.open(PDF_FormatComponent, {
-      height: '50%',
+      height: '90%',
       width: '50%',
     })
     
@@ -278,5 +283,14 @@ delay(ms: number) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
       return text;
+  }
+  invalidReport(dataArray:any){
+    var today = new Date();
+    var lastDate = this.findMaxDateObject(dataArray);
+    console.log("INVALID REPORT TEST : "+lastDate.getDay() + "\nTODAY : " + today);
+    if(lastDate.getDay() == today.getDay() && lastDate.getDate() == today.getDate() && lastDate.getFullYear() == today.getFullYear()){
+      this.addReportDisabled = true;
+    }
+    //this.addReportDisabled = true;
   }
 }

@@ -135,4 +135,8 @@ import { DataTableService } from '../data-table/data-table.service';
             this.sub.unsubscribe();
           }
     }
+
+    executeClose(){
+      window.close();
+    }
 }

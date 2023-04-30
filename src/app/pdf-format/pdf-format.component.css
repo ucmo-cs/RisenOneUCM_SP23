@@ -3,3 +3,32 @@ td , th {
     word-wrap: break-word;
     max-width: 200px;
 }
+
+#wrap{
+    background-color: rgb(255, 195, 76);
+}
+
+.header{
+    width: 80%;
+    float: left;
+    padding-left: 5px;
+}
+
+.topbar{
+    padding-top: 5px;
+    display: flex;
+    align-items: center;
+    color:white;
+}
+
+.testButton2{
+    color:rgba(255,195,76,1) !important;
+    --mdc-protected-button-container-color: white !important;
+    border-radius: 1px;
+    border-color: rgba(255,195,76,1)!important;
+}
+
+.egg2{
+    width: 20%;
+    float: right;
+}

@@ -1,3 +1,19 @@
+<div id = "wrap">
+
+  <div class = "topbar">
+    <div class = "header">
+      <h2>Export To PDF</h2>
+    </div>
+
+    <div class = "egg2">
+      <button class = "testButton2" mat-raised-button color = "primary"(click) = "executePDF()">Confirm</button>
+    </div>
+
+    <!--<div class = "closeButtonClass">
+      <button class = "closeButton" mat-raised-button color = "primary" click = "executeClose()">Cancel</button>
+    </div>-->
+
+  </div>
 <table id = "dataTable2" mat-table [dataSource]="dataSource" matSort
   matSortActive="date" matSortDirection="desc">
 
@@ -31,6 +47,6 @@
         <tr class = "dataRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
 
-      <div class = "egg2">
-        <button class = "testButton2" mat-raised-button color = "primary"(click) = "executePDF()">Confirm</button>
-      </div>
+
+
+  </div>
