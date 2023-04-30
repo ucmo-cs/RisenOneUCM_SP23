@@ -23,10 +23,19 @@ provider:
             - dynamodb:DeleteItem
           Resource:
             - "arn:aws:dynamodb:us-east-2:076692945864:table/Report"
+        # - Effect: Allow
+        #   Action:
+        #     - cognito-idp:AdminInitiateAuth
+        #     - cognito-idp:AdminCreateUser
+        #     - cognito-idp:AdminSetUserPassword
+        #   Resource: "*"
   environment:
     REPORT_TABLE: ${self:custom.tableName}
+    # user_pool_id: { Ref: UserPool }
+    # client_id: { Ref: UserClient }
 
 functions:
+  # How do I change the authorizers so that only the correct user or the admin can use the functions?
   create:
     handler: Lambda_Functions/addReport.handler
     events:
@@ -46,6 +55,15 @@ functions:
               - id
               - account_id
             allowCredentials: false
+          # authorizer:
+          #   name: AddReportAuthorizer
+          #   type: COGNITO_USER_POOLS
+          #   arn:
+          #     Fn::GetAtt:
+          #       - UserPool
+          #       - Arn
+          #   claims:
+          #     - email
   list:
     handler: Lambda_Functions/getReports.handler
     events:
@@ -53,7 +71,15 @@ functions:
           path: list-reports
           method: get
           cors: true
-
+          # authorizer:
+          #   name: ListReportsAuthorizer
+          #   type: COGNITO_USER_POOLS
+          #   arn:
+          #     Fn::GetAtt:
+          #       - UserPool
+          #       - Arn
+          #   claims:
+          #     - email
   get:
     handler: Lambda_Functions/getOneReport.handler
     events:
@@ -73,7 +99,15 @@ functions:
               - id
               - account_id
             allowCredentials: false
-
+          # authorizer:
+          #   name: GetOneReportAuthorizer
+          #   type: COGNITO_USER_POOLS
+          #   arn:
+          #     Fn::GetAtt:
+          #       - UserPool
+          #       - Arn
+          #   claims:
+          #     - email
   listForAccount:
     handler: Lambda_Functions/getReportsForAccount.handler
     events:
@@ -92,7 +126,15 @@ functions:
               - X-Amzn-Trace-Id
               - account_id
             allowCredentials: false
-
+          # authorizer:
+          #   name: ListReportsForAccountAuthorizer
+          #   type: COGNITO_USER_POOLS
+          #   arn:
+          #     Fn::GetAtt:
+          #       - UserPool
+          #       - Arn
+          #   claims:
+          #     - email
   update:
     handler: Lambda_Functions/editReport.handler
     events:
@@ -112,5 +154,45 @@ functions:
               - id
               - account_id
             allowCredentials: false
+          # authorizer:
+          #   name: UpdateReportAuthorizer
+          #   type: COGNITO_USER_POOLS
+          #   arn:
+          #     Fn::GetAtt:
+          #       - UserPool
+          #       - Arn
+          #   claims:
+          #     - email
+  # login:
+  #   handler: Lambda_Functions/Auth/login.handler
+  #   events:
+  #     - http:
+  #         path: login
+  #         method: post
+  #         cors: true
 
-  
+# resources:
+#   Resources:
+#     UserPool:
+#       Type: AWS::Cognito::UserPool
+#       Properties:
+#         UserPoolName: serverless-auth-pool
+#         Schema:
+#           - Name: email
+#             Required: true
+#             Mutable: true
+#         Policies:
+#           PasswordPolicy:
+#             MinimumLength: 6
+#         AutoVerifiedAttributes: ["email"]
+
+#     UserClient:
+#       Type: AWS::Cognito::UserPoolClient
+#       Properties:
+#         ClientName: user-pool-ui
+#         GenerateSecret: false
+#         UserPoolId: { Ref: UserPool }
+#         AccessTokenValidity: 5
+#         IdTokenValidity: 5
+#         ExplicitAuthFlows:
+#           - "ADMIN_NO_SRP_AUTH"
